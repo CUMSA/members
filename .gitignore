@@ -7,7 +7,6 @@ app/storage/
 
 # Laravel 5 & Lumen specific
 bootstrap/cache/*
-!bootstrap/cache/.gitignore # need to check in cache directory for composer update
 storage/
 .env.*.php
 .env.php
