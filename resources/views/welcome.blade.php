@@ -38,7 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">CUMSA Members</div>
+                <div class="title">CUMSA Members!</div>
             </div>
         </div>
     </body>
