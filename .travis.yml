@@ -20,3 +20,4 @@ after_success:
   - ssh-add .travis/cumsa_ci_rsa
   - git remote add deploy ssh://cumsaorg@cumsa.org/home/cumsaorg/members-repo
   - git push deploy
+  - ssh cumsaorg@cumsa.org "cd /home/cumsaorg/members-repo && .travis/deploy.sh"
