@@ -10,6 +10,8 @@ matrix:
 notifications:
   on_success: never
   on_failure: always
+addons:
+  ssh_known_hosts: cumsa.org
 after_success:
   - openssl aes-256-cbc -K $encrypted_7edbf22d25f4_key -iv $encrypted_7edbf22d25f4_iv
     -in cumsa_ci_rsa.enc -out cumsa_ci_rsa -d
