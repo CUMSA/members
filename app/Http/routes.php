@@ -27,5 +27,7 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    // Event attendees routes
+    Route::get('event/{event_id}/attendee/{crsid}', ['as' => 'event.attendee.get', 'uses' => 'Events\EventAttendeesController@getAttendee']);
+
 });
