@@ -56,7 +56,7 @@ class EventAttendeesController extends Controller
                     'attendee' => $attendee->crsid,
                     'success' => true,
                     'comments' => $attendee->comments,
-                    'time_admitted' => $attendee->time_admitted,
+                    'time_admitted_diff' => $attendee->time_admitted->diffForHumans(),
                     'error' => 'Attendee already admitted',
                 ]);
             }
@@ -68,7 +68,7 @@ class EventAttendeesController extends Controller
                 'attendee' => $attendee->crsid,
                 'success' => true,
                 'comments' => $attendee->comments,
-                'time_admitted' => $attendee->time_admitted,
+                'time_admitted_diff' => $attendee->time_admitted->diffForHumans(),
             ]);
         } else {
             return view('events.attendee', [
