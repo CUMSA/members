@@ -31,4 +31,12 @@
     .title {
         font-size: 96px;
     }
+
+    .header {
+        font-size: 48px;
+    }
+
+    .sub_header {
+        font-size: 32px;
+    }
 </style>

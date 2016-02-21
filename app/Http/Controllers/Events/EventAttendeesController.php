@@ -54,11 +54,16 @@ class EventAttendeesController extends Controller
             $admit_time = Carbon::now();
             $attendee->time_admitted = $admit_time;
             $attendee->save();
-            echo 'Attendee ' . $attendee->crsid . ' marked as attending at ' . $admit_time->toDateTimeString() . '.';
-            echo '<br />';
-            echo 'Comments: '. $attendee->comments;
+            return view('events.attendee', [
+                'attendee' => $attendee->crsid,
+                'success' => true,
+                'comments' => $attendee->comments
+            ]);
         } else {
-            abort(404, 'Attendee not found.');
+            return view('events.attendee', [
+                'success' => false,
+                'error' => 'Attendee not found'
+            ]);
         }
     }
 
