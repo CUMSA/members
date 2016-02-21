@@ -43,7 +43,6 @@ class EventAttendeesController extends Controller
         if($crsid === null) {
             return view('events.attendee', [
                 'event_id' => $event_id,
-                'success' => false,
                 'error' => 'Enter a CRSID'
             ]);
         }
@@ -51,7 +50,7 @@ class EventAttendeesController extends Controller
         $attendee = $this->getEventAttendee($event_id, $crsid);
 
         if($attendee !== null) {
-            if ($attendee->time_admitted->eq(new Carbon('0000-00-00 00:00:00'))) {
+            if (!$attendee->time_admitted->eq(new Carbon('0000-00-00 00:00:00'))) {
                 return view('events.attendee', [
                     'event_id' => $event_id,
                     'attendee' => $attendee->crsid,
