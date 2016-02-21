@@ -15,3 +15,5 @@ addons:
 deploy:
   provider: script
   script: .travis/deploy_travis.sh
+  on:
+  	branch: master
