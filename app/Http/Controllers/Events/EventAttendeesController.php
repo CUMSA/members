@@ -51,6 +51,16 @@ class EventAttendeesController extends Controller
         $attendee = $this->getEventAttendee($event_id, $crsid);
 
         if($attendee !== null) {
+            if ($attendee->time_admitted->eq(new Carbon('0000-00-00 00:00:00'))) {
+                return view('events.attendee', [
+                    'event_id' => $event_id,
+                    'attendee' => $attendee->crsid,
+                    'success' => true,
+                    'comments' => $attendee->comments,
+                    'time_admitted' => $attendee->time_admitted,
+                    'error' => 'Attendee already admitted',
+                ]);
+            }
             $admit_time = Carbon::now();
             $attendee->time_admitted = $admit_time;
             $attendee->save();
@@ -58,7 +68,8 @@ class EventAttendeesController extends Controller
                 'event_id' => $event_id,
                 'attendee' => $attendee->crsid,
                 'success' => true,
-                'comments' => $attendee->comments
+                'comments' => $attendee->comments,
+                'time_admitted' => $attendee->time_admitted,
             ]);
         } else {
             return view('events.attendee', [

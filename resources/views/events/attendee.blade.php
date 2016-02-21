@@ -50,7 +50,9 @@
             @if ($success)
                 <h2 class="form-signin-heading">{{ $attendee }} marked present.</h2>
                 <h4 class="sub_header">Comments : {{ $comments }}</h4>
-            @else
+                <h4 class="sub_header">Admitted at: {{ $time_admitted->toDateTimeString() }}</h4>
+            @endif
+            @if ($error)
                 <h2 class="form-signin-heading">{{ $error }}</h2>
             @endif
                 <label for="inputCrsid" class="sr-only">crsid</label>
