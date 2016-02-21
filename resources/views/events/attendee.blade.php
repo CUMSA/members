@@ -40,19 +40,12 @@
     }
 </style>
 
-<script language="text/javascript">
-    function submit() {
-        document.getElementById('scan_attendee').target += "/" + document.getElementById('inputCrsid').value;
-        return true;
-    }
-</script>
-
 @stop
 
 @section('body')
     <body>
         <div class="container">
-            <form type="post" id="scan_attendee" onsubmit="return submit();" class="form-signin" target="{!! route('event.attendee.scan', ['event_id' => $event_id, 'crsid' => '']) !!}">
+            <form method="post" id="scan_attendee" class="form-signin" target="{!! route('event.attendee.post', ['event_id' => $event_id]) !!}">
 
             @if ($success)
                 <h2 class="form-signin-heading">{{ $attendee }} marked present.</h2>
@@ -61,9 +54,9 @@
                 <h2 class="form-signin-heading">{{ $error }}</h2>
             @endif
                 <label for="inputCrsid" class="sr-only">crsid</label>
-                <input type="text" id="inputCrsid" class="form-control" placeholder="crsid" required autofocus>
-                <input type="hidden" name="event_id" value="{{ $event_id }}">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Check in</button>
+                <input type="text" id="inputCrsid" name="crsid" class="form-control" placeholder="crsid" required autofocus>
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Check in">
             </form>
 
         </div> <!-- /container -->

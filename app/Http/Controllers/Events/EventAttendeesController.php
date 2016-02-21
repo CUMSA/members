@@ -22,21 +22,13 @@ class EventAttendeesController extends Controller
     */
 
     /**
-     * Handle an attendee retrieval request
+     * Web form POST, redirect to scan attendee
      * @param Request $request
-     * @param $event_id
-     * @param $crsid TODO: replace with member id
      * @return \Illuminate\View\View
      */
-    public function getAttendee(Request $request, $event_id, $crsid)
+    public function postAttendee(Request $request, $event_id)
     {
-        $attendee = $this->getEventAttendee($event_id, $crsid);
-
-        if($attendee !== null) {
-            echo 'Attendee ' . $attendee->crsid . ' is attending event ' . $attendee->event->name . '.';
-        } else {
-            abort(404, 'Attendee not found.');
-        }
+        return $this->scanAttendee($request, $event_id, $request->input('crsid'));
     }
 
     /**
@@ -46,8 +38,16 @@ class EventAttendeesController extends Controller
      * @param $crsid TODO: replace with member id
      * @return \Illuminate\View\View
      */
-    public function scanAttendee(Request $request, $event_id, $crsid)
+    public function scanAttendee(Request $request, $event_id, $crsid = null)
     {
+        if($crsid === null) {
+            return view('events.attendee', [
+                'event_id' => $event_id,
+                'success' => false,
+                'error' => 'Enter a CRSID'
+            ]);
+        }
+
         $attendee = $this->getEventAttendee($event_id, $crsid);
 
         if($attendee !== null) {
