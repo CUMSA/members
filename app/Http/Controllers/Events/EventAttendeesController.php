@@ -74,7 +74,7 @@ class EventAttendeesController extends Controller
             return view('events.attendee', [
                 'event_id' => $event_id,
                 'success' => false,
-                'error' => 'Attendee not found'
+                'error' => 'Attendee not found: ' . $crsid,
             ]);
         }
     }
