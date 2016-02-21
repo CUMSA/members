@@ -30,7 +30,7 @@ class EventAttendeesController extends Controller
      */
     public function getAttendee(Request $request, $event_id, $crsid)
     {
-        $attendee = $this->getEventAttendee($crsid);
+        $attendee = $this->getEventAttendee($event_id, $crsid);
 
         if($attendee !== null) {
             echo 'Attendee ' . $attendee->crsid . ' is attending event ' . $attendee->event->name . '.';
@@ -48,19 +48,21 @@ class EventAttendeesController extends Controller
      */
     public function scanAttendee(Request $request, $event_id, $crsid)
     {
-        $attendee = $this->getEventAttendee($crsid);
+        $attendee = $this->getEventAttendee($event_id, $crsid);
 
         if($attendee !== null) {
             $admit_time = Carbon::now();
             $attendee->time_admitted = $admit_time;
             $attendee->save();
             return view('events.attendee', [
+                'event_id' => $event_id,
                 'attendee' => $attendee->crsid,
                 'success' => true,
                 'comments' => $attendee->comments
             ]);
         } else {
             return view('events.attendee', [
+                'event_id' => $event_id,
                 'success' => false,
                 'error' => 'Attendee not found'
             ]);
@@ -71,9 +73,9 @@ class EventAttendeesController extends Controller
      * @param $crsid
      * @return mixed
      */
-    public function getEventAttendee($crsid)
+    public function getEventAttendee($event_id, $crsid)
     {
-        $event = Event::find(1);
+        $event = Event::find($event_id);
         if ($event === null) {
             return null;
         }
