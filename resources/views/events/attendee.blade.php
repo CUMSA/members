@@ -38,21 +38,32 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     }
+    .success {
+        background-color: lightgreen;
+    }
+
+    .error {
+        background-color: #db7093;
+    }
+
+    .warning {
+        background-color: yellow;
+    }
 </style>
 
 @stop
 
 @section('body')
-    <body>
+    <body class="{{ isset($success) ? ($success ? (isset($error) ? "warning" : "success") : "error") : '' }}">
         <div class="container">
             <form method="post" id="scan_attendee" class="form-signin" target="{!! route('event.attendee.post', ['event_id' => $event_id]) !!}">
 
-            @if ($success)
+            @if(isset($success) && $success === true)
                 <h2 class="form-signin-heading">{{ $attendee }} marked present.</h2>
                 <h4 class="sub_header">Comments : {{ $comments }}</h4>
                 <h4 class="sub_header">Admitted at: {{ $time_admitted->toDateTimeString() }}</h4>
             @endif
-            @if ($error)
+            @if(isset($error))
                 <h2 class="form-signin-heading">{{ $error }}</h2>
             @endif
                 <label for="inputCrsid" class="sr-only">crsid</label>
