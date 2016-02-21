@@ -56,7 +56,7 @@
 @section('body')
     <body class="{{ isset($success) ? ($success ? (isset($error) ? "warning" : "success") : "error") : '' }}">
         <div class="container">
-            <form method="post" id="scan_attendee" class="form-signin" target="{!! route('event.attendee.post', ['event_id' => $event_id]) !!}">
+            <form method="post" id="scan_attendee" class="form-signin" action="{!! route('event.attendee.post', ['event_id' => $event_id]) !!}">
 
             @if(isset($success) && $success === true)
                 <h2 class="form-signin-heading">{{ $attendee }} marked present.</h2>
