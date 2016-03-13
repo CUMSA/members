@@ -7,5 +7,6 @@ A Laravel application.
 # Installation
 
 * Run `php composer.phar install`
+* Copy rename '.env.example' file to '.env' file
 * Run `php artisan key:generate`
 * Run `php artisan migrate`
