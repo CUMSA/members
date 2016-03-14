@@ -4,7 +4,8 @@
         <title>Be right back.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+		<link rel="icon" href="	http://members.cumsa.org/favicon.ico">
+		
         <style>
             html, body {
                 height: 100%;
