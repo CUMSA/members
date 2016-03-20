@@ -15,5 +15,4 @@ storage/
 
 .travis/cumsa_ci_rsa
 public/packages
-composer.lock
 *~
