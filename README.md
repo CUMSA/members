@@ -16,4 +16,4 @@ A Laravel application.
 # Run
 
 * Run `php artisan serve &`.
-* Go to `http://localhost:8000/`.
+* Go to http://localhost:8000/ or http://localhost:8000/admin/members
