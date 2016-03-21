@@ -1,4 +1,4 @@
-# CUMSA Members Directory.
+# CUMSA Members Directory
 
 A Laravel application.
 
@@ -6,7 +6,7 @@ A Laravel application.
 
 # Installation
 
-* Run `php composer.phar install`
-* Copy rename '.env.example' file to '.env' file
-* Run `php artisan key:generate`
-* Run `php artisan migrate`
+* Run `php composer.phar install`.
+* Run `cp .env.example .env` and edit `.env` accordingly.
+* Run `php artisan key:generate`.
+* Run `php artisan migrate`.
