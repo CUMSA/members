@@ -9,4 +9,6 @@ A Laravel application.
 * Run `php composer.phar install`.
 * Run `cp .env.example .env` and edit `.env` accordingly.
 * Run `php artisan key:generate`.
-* Run `php artisan migrate`.
+* Check that the generated key is present in `.env`.
+* Create the database `DB_DATABASE` (as specified in `.env`) in MySQL.
+* Run `php artisan migrate`. If you get an access denied error, run `sudo php artisan migrate`.
