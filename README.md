@@ -12,3 +12,8 @@ A Laravel application.
 * Check that the generated key is present in `.env`.
 * Create the database `DB_DATABASE` (as specified in `.env`) in MySQL.
 * Run `php artisan migrate`. If you get an access denied error, run `sudo php artisan migrate`.
+
+# Run
+
+* Run `php artisan serve &`.
+* Go to `http://localhost:8000/`.
