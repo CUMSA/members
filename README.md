@@ -1,4 +1,4 @@
-# CUMSA Members Directory.
+# CUMSA Members Directory
 
 A Laravel application.
 
@@ -6,7 +6,14 @@ A Laravel application.
 
 # Installation
 
-* Run `php composer.phar install`
-* Copy rename '.env.example' file to '.env' file
-* Run `php artisan key:generate`
-* Run `php artisan migrate`
+* Run `php composer.phar install`.
+* Run `cp .env.example .env` and edit `.env` accordingly.
+* Run `php artisan key:generate`.
+* Check that the generated key is present in `.env`.
+* Create the database `DB_DATABASE` (as specified in `.env`) in MySQL.
+* Run `php artisan migrate`. If you get an access denied error, run `sudo php artisan migrate`.
+
+# Run
+
+* Run `php artisan serve &`.
+* Go to [http://localhost:8000/](http://localhost:8000/) or [http://localhost:8000/admin/members](http://localhost:8000/admin/members).
