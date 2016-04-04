@@ -11,7 +11,6 @@ storage/
 .env.*.php
 .env.php
 .env
-.env.example
 
 .travis/cumsa_ci_rsa
 public/packages
