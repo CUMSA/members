@@ -7,6 +7,8 @@ use App\Forms\MembersSignupForm;
 use App\Member;
 use JsValidator;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Mail;
 
 class MemberController extends Controller
 {
@@ -34,10 +36,15 @@ class MemberController extends Controller
 
         $fresher = Member::create($request->all());
         $fresher->membership_type = 'Non-member';
+        $fresher->registration_time = Carbon::now();
         $fresher->save();
 
-        // TODO: send a notification email to the fresher.
-        // TODO: indicate directly in family table.
+        Mail::send('emails.signup', ['user' => $fresher], function ($m) use ($fresher) {
+            $m->from('database@cumsa.org', 'CUMSA');
+            $m->to($fresher->email_other, $fresher->first_name)->subject('[CUMSA] Thanks for signing up!');
+        });
+
+        // TODO: indicate directly in family table, e.g. by inserting <member_id, Status: 'Looking for parent'> in family relationships table.
 
         return redirect()->route('member.signup.fresher')->with('alert-success', 'You have successfully signed up.');
     }
