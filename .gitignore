@@ -13,3 +13,5 @@ storage/
 .env
 
 .travis/cumsa_ci_rsa
+public/packages
+*~

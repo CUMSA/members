@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Member extends Model
 {
@@ -39,19 +40,22 @@ class Member extends Model
         'release_info',
     );
 
+    public static $options_gender = array('Male', 'Female');
+    public static $options_membership_type = array('Non-member', '1 year', 'Life');
+
     public function college()
     {
-        return $this->hasOne('App\College');
+        return $this->belongsTo('App\College');
     }
 
     public function course()
     {
-        return $this->hasOne('App\Course');
+        return $this->belongsTo('App\Course');
     }
 
     public function scholarship()
     {
-        return $this->hasOne('App\Scholarship');
+        return $this->belongsTo('App\Scholarship');
     }
 
     /**

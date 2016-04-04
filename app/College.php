@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class College extends Model
 {
@@ -26,6 +27,6 @@ class College extends Model
 
     public function members()
     {
-        return $this->belongstoMany('App\Member');
+        return $this->hasMany('App\Member');
     }
 }
