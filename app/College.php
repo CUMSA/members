@@ -27,6 +27,6 @@ class College extends Model
 
     public function members()
     {
-        return $this->belongstoMany('App\Member');
+        return $this->hasMany('App\Member');
     }
 }

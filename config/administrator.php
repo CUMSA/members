@@ -78,8 +78,9 @@ return array(
 	 */
 	'permission'=> function()
 	{
+		return Auth::user()->hasRole('editor');
 		// return Auth::check();
-        return true; // TODO: take this out.
+        // return true; // TODO: take this out.
 	},
 
 	/**

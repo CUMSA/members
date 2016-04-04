@@ -17,54 +17,41 @@ return array(
 	 */
 	'columns' => array(
 		'id',
+		'crsid' => array(
+			'title' => 'CRSID',
+		),
 		'full_name' => array(
 			'title' => 'Name',
 			'select' => "CONCAT((:table).first_name, ' ', (:table).last_name)",
 		),
-		'gender' => array(
-			'title' => 'Gender',
+		'college_name' => array(
+			'title' => 'College',
+			'relationship' => 'college',
+			'select' => "(:table).name",
 		),
-		'date_of_birth' => array(
-			'title' => 'Date of Birth',
-		),
-		'nationality' => array(
-			'title' => 'Nationality',
-		),
-		'is_singapore_pr' => array(
-			'title' => 'Is Singapore PR?',
-		),
-		'nric' => array(
-			'title' => 'NRIC',
-		),
-		'crsid' => array(
-			'title' => 'CRSID',
-		),
-		'email_hermes' => array(
-			'title' => 'Hermes Email',
-		),
-		'email_others' => array(
-			'title' => 'Alternative Email',
+		'course_name' => array(
+			'title' => 'Course',
+			'relationship' => 'course',
+			'select' => "(:table).name",
 		),
 		'mobile_uk' => array(
 			'title' => 'UK Mobile',
 		),
-		'mobile_home' => array(
-			'title' => 'Home Mobile',
+		'email_hermes' => array(
+			'title' => 'Hermes Email',
 		),
-		'address_home' => array(
-			'title' => 'Home Address',
+		'scholarship_name' => array(
+			'title' => 'Scholarship',
+			'relationship' => 'scholarship',
+			'select' => "(:table).name",
 		),
+		'gender' => array('title' => 'Gender'),
+		'date_of_birth' => array('title' => 'Date of Birth'),
 		'start_year' => array(
 			'title' => 'Start Year',
 		),
 		'end_year' => array(
 			'title' => 'End Year',
-		),
-		'college_id' => array(
-			'title' => 'College',
-		),
-		'course_id' => array(
-			'title' => 'Course',
 		),
 		'registration_time' => array(
 			'title' => 'Registration Time',
@@ -74,22 +61,11 @@ return array(
 		),
 		'is_fee_paid' => array(
 			'title' => 'Paid?',
-		),
-		'release_info' => array(
-			'title' => 'Release Info?',
+			'select' => "IF((:table).is_fee_paid, 'Yes', 'No')",
 		),
 		'remarks' => array(
 			'title' => 'Remarks',
 		),
-		// 'num_films' => array(
-		// 	'title' => '# films',
-		// 	'relationship' => 'films',
-		// 	'select' => 'COUNT((:table).id)',
-		// ),
-		// 'formatted_birth_date' => array(
-		// 	'title' => 'Birth Date',
-		// 	'sort_field' => 'birth_date',
-		// ),
 	),
 
 	/**
@@ -106,8 +82,17 @@ return array(
 		'gender' => array(
 			'title' => 'Gender',
 		),
-		'date_of_birth' => array(
-			'title' => 'Date of Birth',
+		'start_year' => array(
+			'title' => 'Start Year',
+		),
+		'end_year' => array(
+			'title' => 'End Year',
+		),
+		'college_id' => array(
+			'title' => 'College',
+		),
+		'course_id' => array(
+			'title' => 'Course',
 		),
 		'nationality' => array(
 			'title' => 'Nationality',
@@ -136,21 +121,6 @@ return array(
 		'address_home' => array(
 			'title' => 'Home Address',
 		),
-		'start_year' => array(
-			'title' => 'Start Year',
-		),
-		'end_year' => array(
-			'title' => 'End Year',
-		),
-		'college_id' => array(
-			'title' => 'College',
-		),
-		'course_id' => array(
-			'title' => 'Course',
-		),
-		'registration_time' => array(
-			'title' => 'Registration Time',
-		),
 		'membership_type' => array(
 			'title' => 'Membership Type',
 		),
@@ -163,17 +133,6 @@ return array(
 		'remarks' => array(
 			'title' => 'Remarks',
 		),
-
-
-		// 'films' => array(
-		// 	'title' => 'Films',
-		// 	'type' => 'relationship',
-		// 	'name_field' => 'name',
-		// ),
-		// 'birth_date' => array(
-		// 	'title' => 'Birth Date',
-		// 	'type' => 'date'
-		// ),
 	),
 
 	/**
@@ -190,15 +149,19 @@ return array(
 		),
 		'gender' => array(
 			'title' => 'Gender',
+			'type' => 'enum',
+			'options' => \App\Member::$options_gender,
 		),
 		'date_of_birth' => array(
 			'title' => 'Date of Birth',
+			'type' => 'date',
 		),
 		'nationality' => array(
 			'title' => 'Nationality',
 		),
 		'is_singapore_pr' => array(
 			'title' => 'Is Singapore PR?',
+			'type' => 'bool',
 		),
 		'nric' => array(
 			'title' => 'NRIC',
@@ -213,47 +176,56 @@ return array(
 			'title' => 'Alternative Email',
 		),
 		'mobile_uk' => array(
-			'title' => 'UK Mobile',
+			'title' => 'Mobile (UK)',
 		),
 		'mobile_home' => array(
-			'title' => 'Home Mobile',
+			'title' => 'Mobile (Home)',
 		),
 		'address_home' => array(
 			'title' => 'Home Address',
+			'type' => 'textarea',
+		),
+		'address_uk' => array(
+			'title' => 'Cambridge Address',
+			'type' => 'textarea',
 		),
 		'start_year' => array(
 			'title' => 'Start Year',
+			'type' => 'number',
 		),
 		'end_year' => array(
 			'title' => 'End Year',
+			'type' => 'number',
 		),
-		'college_id' => array(
+		'college' => array(
 			'title' => 'College',
+			'type' => 'relationship',
 		),
-		'course_id' => array(
+		'course' => array(
 			'title' => 'Course',
+			'type' => 'relationship',
+		),
+		'scholarship' => array(
+			'title' => 'Scholarship',
+			'type' => 'relationship',
 		),
 		'membership_type' => array(
 			'title' => 'Membership Type',
+			'type' => 'enum',
+			'options' => \App\Member::$options_membership_type,
 		),
 		'is_fee_paid' => array(
 			'title' => 'Paid?',
+			'type' => 'bool',
 		),
 		'release_info' => array(
 			'title' => 'Release Info?',
+			'type' => 'bool',
 		),
 		'remarks' => array(
 			'title' => 'Remarks',
+			'type' => 'textarea',
 		),
-		// 'birth_date' => array(
-		// 	'title' => 'Birth Date',
-		// 	'type' => 'date',
-		// ),
-		// 'films' => array(
-		// 	'title' => 'Films',
-		// 	'type' => 'relationship',
-		// 	'name_field' => 'name',
-		// ),
 	),
 
 );
