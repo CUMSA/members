@@ -14,7 +14,7 @@ class Member extends Model
      *
      * @var array
      */
-    protected $dates = ['date_of_birth', 'deleted_at'];
+    protected $dates = ['date_of_birth', 'deleted_at', 'created_at', 'modified_at'];
 
     /**
      * Whitelisted model properties for mass assignment.
@@ -38,6 +38,24 @@ class Member extends Model
         'address_home',
         'address_uk',
         'release_info',
+        'college_id',
+        'course_id',
+        'scholarship_id',
+    );
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = array(
+        'start_year',
+        'end_year',
+        'registration_time',
+        'membership_type',
+        'is_fee_paid',
+        'is_card_issued',
+        'remarks',
     );
 
     public static $options_gender = array('Male', 'Female');
@@ -58,18 +76,4 @@ class Member extends Model
         return $this->belongsTo('App\Scholarship');
     }
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = array(
-        'start_year',
-        'end_year',
-        'registration_time',
-        'membership_type',
-        'is_fee_paid',
-        'is_card_issued',
-        'remarks',
-    );
 }
