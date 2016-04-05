@@ -23,6 +23,7 @@ class Course extends Model
      */
     protected $fillable = array(
         'name',
+        'type',
     );
 
     public function members()
