@@ -57,17 +57,17 @@
 @section('body')
     @if (session('alert-danger'))
         <div class="alert alert-danger">
-            {{ session('message') }}
+            {{ session('alert-danger') }}
         </div>
     @endif
     @if (session('alert-warning'))
         <div class="alert alert-warning">
-            {{ session('message') }}
+            {{ session('alert-warning') }}
         </div>
     @endif
     @if (session('alert-success'))
         <div class="alert alert-success">
-            {{ session('message') }}
+            {{ session('alert-success') }}
         </div>
     @endif
 @endsection

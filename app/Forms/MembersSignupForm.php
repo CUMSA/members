@@ -4,6 +4,9 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 use Carbon\Carbon;
+use App\College;
+use App\Course;
+use App\Scholarship;
 
 class MembersSignupForm extends Form
 {
@@ -31,15 +34,17 @@ class MembersSignupForm extends Form
         $this
             ->add('college_id', 'choice', [
                 'label' => 'College',
-                'choices' => \App\College::lists('name', 'id')->all(),
+                'choices' => College::lists('name', 'id')->all(),
                 'expanded' => false,
                 'multiple' => false,
+                'default_value' => College::where('name', 'None')->first()->id,
             ])
             ->add('course_id', 'choice', [
                 'label' => 'Course',
-                'choices' => \App\Course::lists('name', 'id')->all(),
+                'choices' => Course::lists('name', 'id')->all(),
                 'expanded' => false,
                 'multiple' => false,
+                'default_value' => Course::where('name', 'None')->first()->id,
             ])
             ->add('start_year', 'number', [
                 'label' => 'Matriculation year',
@@ -57,7 +62,7 @@ class MembersSignupForm extends Form
             ->add('is_singapore_pr', 'checkbox', ['label' => 'Singapore PR?'])
             ->add('scholarship_id', 'choice', [
                 'label' => 'Scholarship (if any)',
-                'choices' => \App\Scholarship::lists('name', 'id')->all(),
+                'choices' => Scholarship::lists('name', 'id')->all(),
                 'expanded' => false,
                 'multiple' => false,
             ]);
