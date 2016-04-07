@@ -57,9 +57,9 @@ class MembersSignupForm extends Form
 
         // Singapore details.
         $this
-            ->add('nric', 'text', ['label' => 'NRIC'])
             ->add('nationality', 'text')
             ->add('is_singapore_pr', 'checkbox', ['label' => 'Singapore PR?'])
+            ->add('nric', 'text', ['label' => 'NRIC'])
             ->add('scholarship_id', 'choice', [
                 'label' => 'Scholarship (if any)',
                 'choices' => Scholarship::lists('name', 'id')->all(),
@@ -67,8 +67,12 @@ class MembersSignupForm extends Form
                 'multiple' => false,
             ]);
 
-        // TODO: Last school attended.
-        // TODO: CUMSA family preference.
+        $this
+            ->add('previous_school', 'text', ['label' => 'Last school attended'])
+            ->add('family_join', 'checkbox', [
+                'label' => 'Join a CUMSA family?',
+                'checked' => true,
+            ]);
 
         $this
             ->add('submit', 'submit');

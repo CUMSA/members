@@ -20,7 +20,7 @@ class MemberController extends Controller
             'method' => 'POST',
             'url' => route('member.signup.fresher.save'),
         ]);
-        $validator = JsValidator::make(Member::rules());
+        $validator = JsValidator::make(Member::rules(true));
         return view('members.signup.fresher', compact('form'))->with([
             'validator' => $validator,
         ]);
@@ -29,7 +29,7 @@ class MemberController extends Controller
     public function saveFresher(Request $request)
     {
         $form = $this->form(MembersSignupForm::class);
-        $form->validate(Member::rules(), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
+        $form->validate(Member::rules(true), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
@@ -39,6 +39,8 @@ class MemberController extends Controller
         $fresher->registration_time = Carbon::now();
         $fresher->save();
 
+        // TODO: Save CUMSA family preference.
+
         Mail::send('emails.signup', ['user' => $fresher], function ($m) use ($fresher) {
             $m->from('database@cumsa.org', 'CUMSA');
             $m->to($fresher->email_other, $fresher->first_name)->subject('[CUMSA] Thanks for signing up!');
@@ -46,6 +48,6 @@ class MemberController extends Controller
 
         // TODO: indicate directly in family table, e.g. by inserting <member_id, Status: 'Looking for parent'> in family relationships table.
 
-        return redirect()->route('member.signup.fresher')->with('alert-success', 'You have successfully signed up.');
+        return redirect()->route('member.signup.fresher')->with('alert-success', 'Thanks ' . $fresher->first_name . '! You have successfully signed up.');
     }
 }

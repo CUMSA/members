@@ -41,6 +41,7 @@ class Member extends Model
         'college_id',
         'course_id',
         'scholarship_id',
+        'previous_school',
     );
 
     /**
@@ -61,19 +62,30 @@ class Member extends Model
     public static $options_gender = array('Male', 'Female');
     public static $options_membership_type = array('Non-member', '1 year', 'Life');
 
-    public static function rules()
+    public static function rules($strict = false)
     {
-        return [
+        $rules = [
             'first_name' => 'required',
             'last_name' => 'required',
             'gender' => 'required',
+            'date_of_birth' => 'sometimes|required',
             'email_other' => 'required|email',
-            'email_hermes' => 'email',
+            'email_hermes' => 'sometimes|required|email',
+            'mobile_uk' => 'sometimes|required',
             'start_year' => 'required|integer',
             'end_year' => 'required|integer',
             'nationality' => 'required',
             'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
+            'college_id' => 'required',
+            'course_id' => 'required',
+            'scholarship_id' => 'required',
         ];
+        if ($strict) {
+            $rules = array_merge($rules, [
+                'previous_school' => 'required',
+            ]);
+        }
+        return $rules;
     }
 
     public function college()
