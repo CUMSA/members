@@ -14,7 +14,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "doctrine/dbal": "^2.5",
-        "frozennode/administrator": "dev-dev-bugfix"
+        "frozennode/administrator": "dev-dev-bugfix",
+        "aacotroneo/laravel-saml2": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

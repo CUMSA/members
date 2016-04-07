@@ -26,6 +26,13 @@ Route::get('/', function () {
 |
 */
 
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+});
+
 Route::group(['middleware' => ['web']], function () {
     // Event attendees routes
     Route::get('event/{event_id}/attendee', ['as' => 'event.attendee.get', 'uses' => 'Events\EventAttendeesController@scanAttendee']);

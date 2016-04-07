@@ -156,8 +156,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-	Frozennode\Administrator\AdministratorServiceProvider::class,
-
+    	Frozennode\Administrator\AdministratorServiceProvider::class,
+        Aacotroneo\Saml2\Saml2ServiceProvider::class,
     ],
 
     /*
@@ -204,6 +204,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'Saml2'     => Aacotroneo\Saml2\Facades\Saml2Auth::class,
     ],
 
 ];
