@@ -61,6 +61,18 @@ class Member extends Model
     public static $options_gender = array('Male', 'Female');
     public static $options_membership_type = array('Non-member', '1 year', 'Life');
 
+    public static function rules()
+    {
+        return [
+            'first_name' => 'required|min:1',
+            'last_name' => 'required|min:1',
+            'email' => 'required|email',
+            'start_year' => 'required',
+            'end_year' => 'required',
+            'nationality' => 'required|min:1',
+        ];
+    }
+
     public function college()
     {
         return $this->belongsTo('App\College');

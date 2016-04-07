@@ -11,12 +11,8 @@ class MembersSignupForm extends Form
     {
         // Basic bio details.
         $this
-            ->add('first_name', 'text', [
-                'rules' => 'required|min:1',
-            ])
-            ->add('last_name', 'text', [
-                'rules' => 'required|min:1',
-            ])
+            ->add('first_name', 'text')
+            ->add('last_name', 'text')
             ->add('gender', 'choice', [
                 'choices' => ['Male' => 'Male', 'Female' => 'Female'],
                 'expanded' => true,
@@ -28,7 +24,6 @@ class MembersSignupForm extends Form
         $this
             ->add('email_other', 'email', [
                 'label' => 'Email',
-                'rules' => 'required|email',
             ])
             ->add('mobile_home', 'tel', ['label' => 'Mobile']);
 
@@ -52,7 +47,6 @@ class MembersSignupForm extends Form
             ])
             ->add('end_year', 'number', [
                 'label' => 'Graduation year',
-                'rules' => 'required',
                 'default_value' => (Carbon::today()->year + 3),
             ]);
 

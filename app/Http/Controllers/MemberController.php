@@ -20,7 +20,7 @@ class MemberController extends Controller
             'method' => 'POST',
             'url' => route('member.signup.fresher.save'),
         ]);
-        $validator = JsValidator::make($form->getRules());
+        $validator = JsValidator::make(Member::rules());
         return view('members.signup.fresher', compact('form'))->with([
             'validator' => $validator,
         ]);
