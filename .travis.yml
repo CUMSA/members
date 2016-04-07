@@ -13,7 +13,11 @@ notifications:
 addons:
   ssh_known_hosts: cumsa.org
 deploy:
-  provider: script
-  script: .travis/deploy_travis.sh
-  on:
-    branch: master
+  - provider: script
+    script: .travis/deploy_travis.sh
+    on:
+      branch: dev_beta
+  - provider: script
+    script: .travis/deploy_travis.sh
+    on:
+      branch: master
