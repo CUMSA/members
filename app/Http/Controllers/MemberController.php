@@ -29,7 +29,7 @@ class MemberController extends Controller
     public function saveFresher(Request $request)
     {
         $form = $this->form(MembersSignupForm::class);
-
+        $form->validate(Member::rules(), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }

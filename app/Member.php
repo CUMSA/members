@@ -64,12 +64,15 @@ class Member extends Model
     public static function rules()
     {
         return [
-            'first_name' => 'required|min:1',
-            'last_name' => 'required|min:1',
-            'email' => 'required|email',
-            'start_year' => 'required',
-            'end_year' => 'required',
-            'nationality' => 'required|min:1',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'email_other' => 'required|email',
+            'email_hermes' => 'email',
+            'start_year' => 'required|integer',
+            'end_year' => 'required|integer',
+            'nationality' => 'required',
+            'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
         ];
     }
 
