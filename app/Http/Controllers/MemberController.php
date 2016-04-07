@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use App\Forms\MembersSignupForm;
 use App\Member;
+use App\FamilyRequest;
 use JsValidator;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -39,7 +40,13 @@ class MemberController extends Controller
         $fresher->registration_time = Carbon::now();
         $fresher->save();
 
-        // TODO: Save CUMSA family preference.
+        if ($request->input('family_join') === '1') {
+            // Save CUMSA family preference.
+            $family_request = new FamilyRequest();
+            $family_request->member()->associate($fresher);
+            $family_request->type = 'Child';
+            $family_request->save();
+        }
 
         Mail::send('emails.signup', ['user' => $fresher], function ($m) use ($fresher) {
             $m->from('database@cumsa.org', 'CUMSA');
