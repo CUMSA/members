@@ -14,7 +14,7 @@ class Member extends Model
      *
      * @var array
      */
-    protected $dates = ['date_of_birth', 'deleted_at'];
+    protected $dates = ['date_of_birth', 'deleted_at', 'created_at', 'modified_at'];
 
     /**
      * Whitelisted model properties for mass assignment.
@@ -38,10 +38,55 @@ class Member extends Model
         'address_home',
         'address_uk',
         'release_info',
+        'college_id',
+        'course_id',
+        'scholarship_id',
+        'previous_school',
+    );
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = array(
+        'start_year',
+        'end_year',
+        'registration_time',
+        'membership_type',
+        'is_fee_paid',
+        'is_card_issued',
+        'remarks',
     );
 
     public static $options_gender = array('Male', 'Female');
     public static $options_membership_type = array('Non-member', '1 year', 'Life');
+
+    public static function rules($strict = false)
+    {
+        $rules = [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'date_of_birth' => 'sometimes|required',
+            'email_other' => 'required|email',
+            'email_hermes' => 'sometimes|required|email',
+            'mobile_uk' => 'sometimes|required',
+            'start_year' => 'required|integer',
+            'end_year' => 'required|integer',
+            'nationality' => 'required',
+            'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
+            'college_id' => 'required',
+            'course_id' => 'required',
+            'scholarship_id' => 'required',
+        ];
+        if ($strict) {
+            $rules = array_merge($rules, [
+                'previous_school' => 'required',
+            ]);
+        }
+        return $rules;
+    }
 
     public function college()
     {
@@ -58,18 +103,4 @@ class Member extends Model
         return $this->belongsTo('App\Scholarship');
     }
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = array(
-        'start_year',
-        'end_year',
-        'registration_time',
-        'membership_type',
-        'is_fee_paid',
-        'is_card_issued',
-        'remarks',
-    );
 }

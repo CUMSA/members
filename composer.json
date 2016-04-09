@@ -14,7 +14,10 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "doctrine/dbal": "^2.5",
-        "frozennode/administrator": "dev-dev-bugfix"
+        "frozennode/administrator": "dev-dev-bugfix",
+        "kris/laravel-form-builder": "1.6.*",
+        "proengsoft/laravel-jsvalidation": "~1.1",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -53,7 +56,8 @@
             "php artisan vendor:publish --tag=public --force"
         ],
         "post-update-cmd": [
-            "php artisan optimize"
+            "php artisan optimize",
+            "php artisan vendor:publish --provider=\"Proengsoft\\JsValidation\\JsValidationServiceProvider\" --tag=public --force"
         ]
 
     },
