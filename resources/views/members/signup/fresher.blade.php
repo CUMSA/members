@@ -1,6 +1,6 @@
 @extends('layouts.form')
 
-@section('body')
+@section('content')
 <body>
     <div class="container">
         @parent

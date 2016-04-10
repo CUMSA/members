@@ -108,4 +108,31 @@ class Member extends Model
         return $this->belongsTo('App\Scholarship');
     }
 
+    public function getCollegeNameAttribute() {
+        if (isset($this->college)) {
+            return $this->college->name;
+        } else {
+            return null;
+        }
+    }
+
+    public function getCourseNameAttribute() {
+        if (isset($this->course)) {
+            return $this->course->name;
+        } else {
+            return null;
+        }
+    }
+
+    public function getScholarshipNameAttribute() {
+        if (isset($this->scholarship)) {
+            return $this->scholarship->name;
+        } else {
+            return null;
+        }
+    }
+
+    public function getFullNameAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }
