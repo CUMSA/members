@@ -55,3 +55,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'SignupController@saveFresher']);
 });
 
+// Committee routes.
+Route::group(['middleware' => ['web'], 'prefix' => 'comm/'], function () {
+    Route::get('members', ['as' => 'comm.members', 'uses' => 'Committee\MemberController@index']);
+});

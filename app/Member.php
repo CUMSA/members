@@ -59,6 +59,8 @@ class Member extends Model
         'remarks',
     );
 
+    protected $appends = ['college_name', 'scholarship_name', 'course_name', 'full_name'];
+
     public static $options_gender = array('Male', 'Female');
     public static $options_membership_type = array('Non-member', '1 year', 'Life');
     public static $options_allowed_membership_type = array('1 year', 'Life');
