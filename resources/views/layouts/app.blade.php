@@ -65,6 +65,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    @if (!is_null(Auth::user()) and Auth::user()->hasRole('viewer'))
+                    <li><a href="{{ route('comm.members') }}">Members DB</a></li>
+                    @endif
                     @if (!is_null(Auth::user()) and Auth::user()->hasRole('editor'))
                     <li><a href="{{ url('/admin') }}">Edit Members</a></li>
                     @endif

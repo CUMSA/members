@@ -1,13 +1,26 @@
 
-@extends('layouts.default')
+@extends('layouts.app')
 
-@section('body')
-<body>
+@section('content')
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Committee Members Dashboard</div>
+
+            <div class="panel-body">
+                <div id="hot"></div>
+                <p><button id='export' class='btn btn-success'>Export as CSV</button></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.24.1/handsontable.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.24.1/handsontable.css">
 --><script src="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.js"></script>
 <link href="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.css" type="text/css" rel="stylesheet">
-<div id="hot"></div>
 <script>
     $(document).ready(function() {
         var dataObj = {!! $membersJson !!};
@@ -89,9 +102,14 @@
             filters: true,
         });
         setTimeout(function() {
-            $('#hot').handsontable('getInstance').getPlugin('collapsibleColumns').collapseAll();
-        }, 1000);
+            var inst = $('#hot').handsontable('getInstance');
+            inst.getPlugin('collapsibleColumns').collapseAll();
+            $('#export').click(function() {
+                inst.getPlugin('exportFile').downloadFile('csv', {
+                    filename: 'members-filtered'
+              });
+            });
+        }, 500);
     });
 </script>
-</body>
 @endsection
