@@ -21,7 +21,7 @@ return array(
 	 *
 	 *  @type array
 	 */
-	'middleware' => array(),
+	'middleware' => array('web'),
 
 	/**
 	 * Page title
@@ -101,14 +101,14 @@ return array(
 	 *
 	 * @type string
 	 */
-	'home_page' => 'settings.site',
+	'home_page' => 'members',
 
 	/**
 	 * The route to which the user will be taken when they click the "back to site" button
 	 *
 	 * @type string
 	 */
-	'back_to_site_path' => '/',
+	'back_to_site_path' => 'home',
 
 	/**
 	 * The login path is the path where Administrator will send the user if they fail a permission check

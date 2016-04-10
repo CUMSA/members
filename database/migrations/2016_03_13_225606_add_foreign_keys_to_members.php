@@ -33,7 +33,7 @@ class AddForeignKeysToMembers extends Migration
     {
         Schema::table('members', function (Blueprint $table) {
             $table->dropForeign('members_college_id_foreign');
-            $table->dropForeign('members_scholarsip_id_foreign');
+            $table->dropForeign('members_scholarship_id_foreign');
             $table->dropForeign('members_course_id_foreign');
 
             $table->dropColumn('college_id');

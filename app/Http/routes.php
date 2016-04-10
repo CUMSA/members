@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,11 +23,33 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
     // Event attendees routes
     Route::get('event/{event_id}/attendee', ['as' => 'event.attendee.get', 'uses' => 'Events\EventAttendeesController@scanAttendee']);
     Route::post('event/{event_id}/attendee', ['as' => 'event.attendee.post', 'uses' => 'Events\EventAttendeesController@postAttendee']);
     Route::post('event/{event_id}/attendee/{crsid}', ['as' => 'event.attendee.scan', 'uses' => 'Events\EventAttendeesController@scanAttendee']);
+
+    // Authentication Routes...
+    Route::get('login', 'Auth\AuthController@showLoginForm');
+    Route::get('auth/login', 'Auth\AuthController@showLoginForm');
+    Route::post('login', 'Auth\AuthController@login');
+    Route::get('logout', 'Auth\AuthController@logout');
+    Route::get('auth/logout', 'Auth\AuthController@logout');
+
+    // TODO: Registration Routes...
+
+    // Password Reset Routes...
+    $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    $this->post('password/reset', 'Auth\PasswordController@reset');
+
+    Route::get('/home', 'HomeController@index');
+
     Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'MemberController@signupFresher']);
     Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'MemberController@saveFresher']);
     Route::get('signup/success', ['as' => 'member.signup.success', 'uses' => 'MemberController@signupSuccess']);
 });
+

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "01a9c320f3718d9a69b8df43da976562",
-    "content-hash": "3e63c5d912a3b1cf53dfaf7352e51a20",
+    "hash": "3aae8c795a52170e13b46171c2bfd40f",
+    "content-hash": "b6d645239ccdcd6069869f4eaa68ea23",
     "packages": [
         {
             "name": "ckeditor/ckeditor",
@@ -101,6 +101,53 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "cumsa/laravel-ucam-raven",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CUMSA/laravel-ucam-raven.git",
+                "reference": "8132a20ee885aa7da9086ea441705f7dcc0798ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CUMSA/laravel-ucam-raven/zipball/8132a20ee885aa7da9086ea441705f7dcc0798ff",
+                "reference": "8132a20ee885aa7da9086ea441705f7dcc0798ff",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.0.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CUMSA\\Raven\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Wong",
+                    "email": "wonglkd@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 package for University of Cambridge Raven integration (UCamWebauth)",
+            "homepage": "https://github.com/CUMSA/laravel-ucam-raven",
+            "keywords": [
+                "cambridge",
+                "laravel",
+                "raven",
+                "ucam"
+            ],
+            "support": {
+                "source": "https://github.com/CUMSA/laravel-ucam-raven/tree/master",
+                "issues": "https://github.com/CUMSA/laravel-ucam-raven/issues"
+            },
+            "time": "2016-04-10 00:45:17"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -666,6 +713,177 @@
                 "source": "https://github.com/CUMSA/Laravel-Administrator/tree/dev-bugfix"
             },
             "time": "2016-03-21 00:30:39"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "d094e337976dff9d8e2424e8485872194e768662"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d094e337976dff9d8e2424e8485872194e768662",
+                "reference": "d094e337976dff9d8e2424e8485872194e768662",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/promises": "~1.0",
+                "guzzlehttp/psr7": "~1.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0",
+                "psr/log": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.2-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2016-03-21 20:02:09"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/bb9024c526b22f3fe6ae55a561fd70653d470aa8",
+                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "time": "2016-03-08 01:15:46"
+        },
+        {
+            "name": "guzzlehttp/psr7",
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/psr7.git",
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "PSR-7 message implementation",
+            "keywords": [
+                "http",
+                "message",
+                "stream",
+                "uri"
+            ],
+            "time": "2016-02-18 21:54:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1457,6 +1675,55 @@
                 "validator"
             ],
             "time": "2016-01-04 00:23:38"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2015-05-04 20:22:00"
         },
         {
             "name": "psr/log",
@@ -3681,6 +3948,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "cumsa/laravel-ucam-raven": 20,
         "frozennode/administrator": 20
     },
     "prefer-stable": false,

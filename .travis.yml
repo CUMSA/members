@@ -1,10 +1,18 @@
 language: php
 php:
 - 5.6
+services:
+- mysql
 before_script:
+- cp .travis/.env.travis .env
+- mysql -e 'create database cumsa_members_test'
 - composer self-update
 - composer install --prefer-source --no-interaction --dev
-script: phpunit
+script:
+- php artisan migrate --no-interaction -vvv
+- php artisan db:seed --no-interaction -vvv
+- phpunit
+- php artisan migrate:rollback --no-interaction -vvv
 matrix:
   fast_finish: true
 notifications:

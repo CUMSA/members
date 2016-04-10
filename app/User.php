@@ -23,4 +23,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $guarded = [
+        'crsid',
+    ];
+
+    public function hasRole($role) {
+        switch ($role) {
+            case 'editor': return $this->role_editor; break;
+            case 'viewer': return $this->role_viewer; break;
+        }
+        return false;
+    }
 }

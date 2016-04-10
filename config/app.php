@@ -157,6 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
     	Frozennode\Administrator\AdministratorServiceProvider::class,
+        CUMSA\Raven\RavenServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
         App\Providers\NricValidationServiceProvider::class,
