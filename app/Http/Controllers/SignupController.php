@@ -12,11 +12,11 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Mail;
 
-class MemberController extends Controller
+class SignupController extends Controller
 {
     use FormBuilderTrait;
 
-    public function signup()
+    public function show()
     {
         $form = $this->form(MembersSignupForm::class,[
             'method' => 'POST',
@@ -27,7 +27,7 @@ class MemberController extends Controller
         ]);
     }
 
-    public function signupFresher()
+    public function showFresher()
     {
         $form = $this->form(FreshersSignupForm::class,[
             'method' => 'POST',
@@ -38,7 +38,7 @@ class MemberController extends Controller
         ]);
     }
 
-    public function saveSignup(Request $request)
+    public function save(Request $request)
     {
         $form = $this->form(MembersSignupForm::class);
         $form->validate(Member::rules(true), [

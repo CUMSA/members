@@ -48,10 +48,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('signup', ['as' => 'member.signup', 'uses' => 'MemberController@signup']);
-    Route::post('signup', ['as' => 'member.signup.save', 'uses' => 'MemberController@saveSignup']);
+    Route::get('signup', ['as' => 'member.signup', 'uses' => 'SignupController@show']);
+    Route::post('signup', ['as' => 'member.signup.save', 'uses' => 'SignupController@save']);
 
-    Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'MemberController@signupFresher']);
-    Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'MemberController@saveFresher']);
+    Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'SignupController@showFresher']);
+    Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'SignupController@saveFresher']);
 });
 
