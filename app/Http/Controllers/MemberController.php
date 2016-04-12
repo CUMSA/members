@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use App\Forms\MembersSignupForm;
+use App\Forms\FreshersSignupForm;
 use App\Member;
 use App\FamilyRequest;
 use JsValidator;
@@ -17,19 +17,18 @@ class MemberController extends Controller
 
     public function signupFresher()
     {
-        $form = $this->form(MembersSignupForm::class,[
+        $form = $this->form(FreshersSignupForm::class,[
             'method' => 'POST',
             'url' => route('member.signup.fresher.save'),
         ]);
-        $validator = JsValidator::make(Member::rules(true));
         return view('members.signup.fresher', compact('form'))->with([
-            'validator' => $validator,
+            'validator' => JsValidator::make(Member::rules(true)),
         ]);
     }
 
     public function saveFresher(Request $request)
     {
-        $form = $this->form(MembersSignupForm::class);
+        $form = $this->form(FreshersSignupForm::class);
         $form->validate(Member::rules(true), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
@@ -52,8 +51,6 @@ class MemberController extends Controller
             $m->from('database@cumsa.org', 'CUMSA');
             $m->to($fresher->email_other, $fresher->first_name)->subject('[CUMSA] Thanks for signing up!');
         });
-
-        // TODO: indicate directly in family table, e.g. by inserting <member_id, Status: 'Looking for parent'> in family relationships table.
 
         return redirect()->route('member.signup.fresher')->with('alert-success', 'Thanks ' . $fresher->first_name . '! You have successfully signed up.');
     }
