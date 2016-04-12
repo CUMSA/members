@@ -9,17 +9,19 @@
             <div class="panel-heading">Committee Members Dashboard</div>
 
             <div class="panel-body">
+                <p>
+                    <button id='export' class='btn btn-success'>Export as CSV</button>
+                    <!-- TODO: Chose columns to show/hide -->
+                    <!-- TODO: Checkbox to show only current members -->
+                </p>
                 <div id="hot"></div>
-                <p><button id='export' class='btn btn-success'>Export as CSV</button></p>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.24.1/handsontable.js'></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.24.1/handsontable.css">
---><script src="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.js"></script>
+<script src="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.js"></script>
 <link href="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.css" type="text/css" rel="stylesheet">
 <script>
     $(document).ready(function() {
@@ -52,16 +54,14 @@
                 { data: "mobile_uk" },
                 { data: "mobile_home" },
 
-                { data: "address_home" },
                 { data: "address_uk" },
+                { data: "address_home" },
+
+                { data: "remarks" },
             ],
-            stretchH: "all",
-            autoWrapRow: true,
-            rowHeaders: true,
-            readOnly: true,
             nestedHeaders: [
-                ["CRSid", {label: "Bio", colspan: 5}, {label: "Nationality", colspan: 3},
-                 "College",  {label: "Course/Scholarship/Prev School", colspan: 4},
+                ["", {label: "Bio", colspan: 5}, {label: "Nationality", colspan: 3},
+                 "",  {label: "Course/Scholarship/Prev School", colspan: 4},
                  {label: "Email", colspan: 2}, {label: "Contact", colspan: 2}, {label: "Address", colspan: 2}],
                 [
                     "CRSid",
@@ -78,14 +78,19 @@
                     "Scholarship",
                     "Previous School",
                     "Release Info",
-                    "Hermes Email",
+                    "Hermes",
                     "External Email",
-                    "Contact (UK)",
-                    "Contact (Home)",
-                    "Address (UK)",
-                    "Address (Home)",
+                    "UK Contact",
+                    "Home Contact",
+                    "UK Address",
+                    "Home Address",
+                    "Remarks",
                 ]
             ],
+            stretchH: "all",
+            autoWrapRow: true,
+            rowHeaders: true,
+            readOnly: true,
             columnSorting: true,
             sortIndicator: true,
             autoColumnSize: {
@@ -95,10 +100,10 @@
             manualColumnResize: true,
             manualRowMove: true,
             manualColumnMove: true,
-            contextMenu: true,
+            contextMenu: false,
             collapsibleColumns: true,
             hiddenColumns: true,
-            dropdownMenu: true,
+            dropdownMenu: ['filter_by_value', 'filter_by_condition', 'filter_action_bar'],
             filters: true,
         });
         setTimeout(function() {

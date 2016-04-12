@@ -11,10 +11,11 @@ class Member extends Model
 
     /**
      * The attributes that should be mutated to dates.
+     * date_of_birth not included inside here because we want it to remain as a date, rather than a date time.
      *
      * @var array
      */
-    protected $dates = ['date_of_birth', 'deleted_at', 'created_at', 'modified_at'];
+    protected $dates = ['deleted_at', 'created_at', 'modified_at'];
 
     /**
      * Whitelisted model properties for mass assignment.
