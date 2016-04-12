@@ -1,15 +1,15 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 
-@section('content')
-<body>
-    <div class="container">
-        @parent
+@section('panel-cols', '8')
+@section('panel-offset', '2')
+@section('panel-heading', 'Fresher Registration')
+@section('panel-body')
+    @parent
 
-        @if(isset($error))
-            <h2 class="form-signin-heading">{{ $error }}</h2>
-        @endif
+    @if(isset($error))
+        <h2 class="form-signin-heading">{{ $error }}</h2>
+    @endif
 
-        {!! form($form) !!}
-    </div>
-</body>
+    {!! form($form) !!}
+
 @endsection

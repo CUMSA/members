@@ -39,8 +39,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-
     @yield('header')
+
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
@@ -65,9 +65,6 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    @if (!is_null(Auth::user()) and Auth::user()->hasRole('viewer'))
-                    <li><a href="{{ route('comm.members') }}">Members DB</a></li>
-                    @endif
                     @if (!is_null(Auth::user()) and Auth::user()->hasRole('editor'))
                     <li><a href="{{ url('/admin') }}">Edit Members</a></li>
                     @endif
@@ -76,22 +73,22 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ route('raven_login') }}">Login via Raven</a></li>
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/signup') }}">Register (member)</a></li>
-                        <li><a href="{{ url('/signup/fresher') }}">Register (fresher)</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+@if (Auth::guest())
+                    <li><a href="{{ route('raven_login') }}">Login via Raven</a></li>
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/signup') }}">Register (member)</a></li>
+                    <li><a href="{{ url('/signup/fresher') }}">Register (fresher)</a></li>
+@else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </ul>
+                    </li>
+@endif
                 </ul>
             </div>
         </div>

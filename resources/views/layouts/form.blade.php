@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 @section('header')
     <style type="text/css">
         .form-signin {
@@ -48,7 +48,8 @@
     {!! $validator !!}
 @endsection
 
-@section('content')
+@section('panel-body')
+    @parent
     @if (session('alert-danger'))
         <div class="alert alert-danger">
             {{ session('alert-danger') }}

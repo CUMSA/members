@@ -1,12 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
+@section('panel-cols', '8')
+@section('panel-offset', '2')
+@section('panel-heading', 'Login')
+@section('panel-body')
                     <div class="text-center">
                         <p><a class="text-center btn btn-success" href="{{ route('raven_login') }}" role="button">Login via Raven</a></p>
                         <p><em>or</em></p>
@@ -62,9 +59,4 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+@stop
