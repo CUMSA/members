@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
+use App\Forms\MembersSignupForm;
 use App\Forms\FreshersSignupForm;
 use App\Member;
 use App\FamilyRequest;
@@ -15,6 +16,17 @@ class MemberController extends Controller
 {
     use FormBuilderTrait;
 
+    public function signup()
+    {
+        $form = $this->form(MembersSignupForm::class,[
+            'method' => 'POST',
+            'url' => route('member.signup.save'),
+        ]);
+        return view('members.signup.index', compact('form'))->with([
+            'validator' => JsValidator::make(Member::rules(true)),
+        ]);
+    }
+
     public function signupFresher()
     {
         $form = $this->form(FreshersSignupForm::class,[
@@ -24,6 +36,32 @@ class MemberController extends Controller
         return view('members.signup.fresher', compact('form'))->with([
             'validator' => JsValidator::make(Member::rules(true)),
         ]);
+    }
+
+    public function saveSignup(Request $request)
+    {
+        $form = $this->form(MembersSignupForm::class);
+        $form->validate(Member::rules(true), [
+            'nricformat' => 'NRIC checksum failed. Try checking it again.',
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
+        ]);
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+
+        $member = Member::create($request->all());
+        $member->membership_type = $request->membership_type;
+        $member->registration_time = null;
+        $member->save();
+
+        // TODO: record down sources of contact.
+
+        Mail::send('emails.registration', ['user' => $member], function ($m) use ($member) {
+            $m->from('database@cumsa.org', 'CUMSA');
+            $m->to($member->email_hermes, $member->first_name)->subject('[CUMSA] Thanks for signing up!');
+        });
+
+        return redirect()->route('member.signup')->with('alert-success', 'Thanks ' . $member->first_name . '! You have successfully signed up. You should receive a confirmation email shortly at your Cambridge email address.');
     }
 
     public function saveFresher(Request $request)
@@ -36,7 +74,7 @@ class MemberController extends Controller
 
         $fresher = Member::create($request->all());
         $fresher->membership_type = 'Non-member';
-        $fresher->registration_time = Carbon::now();
+        $fresher->registration_time = null;
         $fresher->save();
 
         if ($request->input('family_join') === '1') {

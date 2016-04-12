@@ -109,7 +109,7 @@ return array(
 		'email_hermes' => array(
 			'title' => 'Hermes Email',
 		),
-		'email_others' => array(
+		'email_other' => array(
 			'title' => 'Alternative Email',
 		),
 		'mobile_uk' => array(
@@ -172,7 +172,7 @@ return array(
 		'email_hermes' => array(
 			'title' => 'Hermes Email',
 		),
-		'email_others' => array(
+		'email_other' => array(
 			'title' => 'Alternative Email',
 		),
 		'mobile_uk' => array(
