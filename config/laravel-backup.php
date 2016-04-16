@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_URL'),
+        'name' => env('APP_URL', 'cumsa_members'),
 
         'source' => [
 
@@ -19,6 +19,7 @@ return [
                  * specify individual files as well.
                  */
                 'include' => [
+                    // Everything except the database should be in version control.
                     base_path(),
                 ],
 
@@ -49,6 +50,7 @@ return [
              */
             'disks' => [
                 'local',
+                'dropbox',
             ],
         ],
     ],
@@ -75,23 +77,23 @@ return [
             /*
              * The amount of weeks of which one weekly backup must be kept.
              */
-            'keepWeeklyBackupsForWeeks' => 8,
+            'keepWeeklyBackupsForWeeks' => 15,
 
             /*
              * The amount of months of which one monthly backup must be kept.
              */
-            'keepMonthlyBackupsForMonths' => 4,
+            'keepMonthlyBackupsForMonths' => 18,
 
             /*
              * The amount of years of which one yearly backup must be kept
              */
-            'keepYearlyBackupsForYears' => 2,
+            'keepYearlyBackupsForYears' => 20,
 
             /*
              * After cleaning up the backups remove the oldest backup until
              * this amount of megabytes has been reached.
              */
-            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 5000
+            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 10000
         ]
     ],
 
@@ -103,8 +105,8 @@ return [
      */
     'monitorBackups' => [
         [
-            'name' => env('APP_URL'),
-            'disks' => ['local'],
+            'name' => env('APP_URL', 'cumsa_members'),
+            'disks' => ['local', 'dropbox'],
             'newestBackupsShouldNotBeOlderThanDays' => 1,
             'storageUsedMayNotBeHigherThanMegabytes' => 5000,
         ],
@@ -133,7 +135,7 @@ return [
          * Slack requires the installation of the maknz/slack package.
          */
         'events' => [
-            'whenBackupWasSuccessful'     => ['log'],
+            'whenBackupWasSuccessful'     => ['log', 'mail'],
             'whenCleanupWasSuccessful'    => ['log'],
             'whenHealthyBackupWasFound'   => ['log'],
             'whenBackupHasFailed'         => ['log', 'mail'],
@@ -145,8 +147,8 @@ return [
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => 'your@email.com',
-            'to'   => 'your@email.com',
+            'from' => 'database@cumsa.org',
+            'to'   => 'cumsa.database@gmail.com',
         ],
 
         /*

@@ -162,6 +162,8 @@ return [
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
         App\Providers\NricValidationServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        GrahamCampbell\Flysystem\FlysystemServiceProvider::class,
+        App\Providers\DropboxServiceProvider::class,
     ],
 
     /*
