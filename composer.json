@@ -22,7 +22,10 @@
         "frozennode/administrator": "dev-dev-bugfix",
         "kris/laravel-form-builder": "1.6.*",
         "proengsoft/laravel-jsvalidation": "~1.1",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "league/flysystem-dropbox": "^1.0",
+        "spatie/laravel-backup": "^3.4",
+        "graham-campbell/flysystem": "^3.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

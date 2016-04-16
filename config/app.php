@@ -161,6 +161,7 @@ return [
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
         App\Providers\NricValidationServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*
