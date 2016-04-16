@@ -26,6 +26,13 @@ class Course extends Model
         'course_type',
     );
 
+    public function getCourseWithTypeAttribute() {
+        if ($this->name == 'None') {
+            return $this->name;
+        }
+        return $this->course_type . ' - ' . $this->name;
+    }
+
     public function members()
     {
         return $this->belongstoMany('App\Member');

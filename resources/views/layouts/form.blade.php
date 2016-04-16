@@ -1,12 +1,6 @@
-@extends('layouts.default')
+@extends('layouts.panel')
 @section('header')
     <style type="text/css">
-        body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #eee;
-        }
-
         .form-signin {
         max-width: 330px;
         padding: 15px;
@@ -54,7 +48,8 @@
     {!! $validator !!}
 @endsection
 
-@section('body')
+@section('panel-body')
+    @parent
     @if (session('alert-danger'))
         <div class="alert alert-danger">
             {{ session('alert-danger') }}

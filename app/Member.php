@@ -11,10 +11,11 @@ class Member extends Model
 
     /**
      * The attributes that should be mutated to dates.
+     * date_of_birth not included inside here because we want it to remain as a date, rather than a date time.
      *
      * @var array
      */
-    protected $dates = ['date_of_birth', 'deleted_at', 'created_at', 'modified_at'];
+    protected $dates = ['deleted_at', 'created_at', 'modified_at'];
 
     /**
      * Whitelisted model properties for mass assignment.
@@ -42,6 +43,8 @@ class Member extends Model
         'course_id',
         'scholarship_id',
         'previous_school',
+        'start_year',
+        'end_year',
     );
 
     /**
@@ -50,8 +53,6 @@ class Member extends Model
      * @var array
      */
     protected $guarded = array(
-        'start_year',
-        'end_year',
         'registration_time',
         'membership_type',
         'is_fee_paid',
@@ -59,8 +60,12 @@ class Member extends Model
         'remarks',
     );
 
+    protected $appends = ['college_name', 'scholarship_name', 'course_name', 'full_name'];
+
     public static $options_gender = array('Male', 'Female');
     public static $options_membership_type = array('Non-member', '1 year', 'Life');
+    public static $options_allowed_membership_type = array('1 year', 'Life');
+    public static $options_membership_type_with_cost = array('1 year (£8)', 'Life (£15)');
 
     public static function rules($strict = false)
     {
@@ -68,21 +73,24 @@ class Member extends Model
             'first_name' => 'required',
             'last_name' => 'required',
             'gender' => 'required',
-            'date_of_birth' => 'sometimes|required',
+            'date_of_birth' => 'sometimes|required|dateformat:Y-m-d',
             'email_other' => 'required|email',
             'email_hermes' => 'sometimes|required|email',
             'mobile_uk' => 'sometimes|required',
-            'start_year' => 'required|integer',
-            'end_year' => 'required|integer',
+            'address_uk' => 'sometimes|required',
+            'start_year' => 'required|integer|digits:4',
+            'end_year' => 'required|integer|digits:4',
             'nationality' => 'required',
             'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
             'college_id' => 'required',
             'course_id' => 'required',
             'scholarship_id' => 'required',
+            'release_info' => 'accepted',
+            'membership_type' => ['sometimes', 'required', 'in:' . implode(',', static::$options_allowed_membership_type)],
         ];
         if ($strict) {
             $rules = array_merge($rules, [
-                'previous_school' => 'required',
+                'previous_school' => 'sometimes|required',
             ]);
         }
         return $rules;
@@ -103,4 +111,31 @@ class Member extends Model
         return $this->belongsTo('App\Scholarship');
     }
 
+    public function getCollegeNameAttribute() {
+        if (isset($this->college)) {
+            return $this->college->name;
+        } else {
+            return null;
+        }
+    }
+
+    public function getCourseNameAttribute() {
+        if (isset($this->course)) {
+            return $this->course->name;
+        } else {
+            return null;
+        }
+    }
+
+    public function getScholarshipNameAttribute() {
+        if (isset($this->scholarship)) {
+            return $this->scholarship->name;
+        } else {
+            return null;
+        }
+    }
+
+    public function getFullNameAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

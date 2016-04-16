@@ -48,8 +48,14 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', 'HomeController@index');
 
-    Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'MemberController@signupFresher']);
-    Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'MemberController@saveFresher']);
-    Route::get('signup/success', ['as' => 'member.signup.success', 'uses' => 'MemberController@signupSuccess']);
+    Route::get('signup', ['as' => 'member.signup', 'uses' => 'SignupController@show']);
+    Route::post('signup', ['as' => 'member.signup.save', 'uses' => 'SignupController@save']);
+
+    Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'SignupController@showFresher']);
+    Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'SignupController@saveFresher']);
 });
 
+// Committee routes.
+Route::group(['middleware' => ['web'], 'prefix' => 'comm/'], function () {
+    Route::get('members', ['as' => 'comm.members', 'uses' => 'Committee\MemberController@index']);
+});

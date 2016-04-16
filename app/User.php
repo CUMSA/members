@@ -30,8 +30,8 @@ class User extends Authenticatable
 
     public function hasRole($role) {
         switch ($role) {
-            case 'editor': return $this->role_editor; break;
-            case 'viewer': return $this->role_viewer; break;
+            case 'editor': return (bool)$this->role_editor; break;
+            case 'viewer': return (bool)$this->role_viewer; break;
         }
         return false;
     }
