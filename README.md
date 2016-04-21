@@ -16,4 +16,9 @@ A Laravel application.
 # Run
 
 * Run `php artisan serve &`.
-* Go to [http://localhost:8000/](http://localhost:8000/) or [http://localhost:8000/admin/members](http://localhost:8000/admin/members).
+* Go to [http://localhost:8000/](http://localhost:8000/).
+* Add role_viewer and role_editor rights in users table.
+
+# On server
+
+* Add cron job entry `* * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1` to call Laravel scheduler every minute

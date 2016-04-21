@@ -62,6 +62,12 @@ return [
             // 'timeout'  => 30,
         ],
 
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'access_token' => env('DROPBOX_ACCESS_TOKEN'),
+            'app_secret' => env('DROPBOX_APP_SECRET'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key'    => 'your-key',
