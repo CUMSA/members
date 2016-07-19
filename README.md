@@ -4,8 +4,12 @@ A Laravel application.
 
 [![Build Status](https://travis-ci.org/CUMSA/members.svg)](https://travis-ci.org/CUMSA/members)
 
-# Installation
+# Pre-Installation
+* Install Composer [https://getcomposer.org/download/](https://getcomposer.org/download/)
+* Install Laravel 5.2 framework [https://laravel.com/docs/5.2](https://laravel.com/docs/5.2)
+* Install LAMP stack
 
+# Installation
 * Run `php composer.phar install`.
 * Run `cp .env.example .env` and edit `.env` accordingly.
 * Run `php artisan key:generate`.
