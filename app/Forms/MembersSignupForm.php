@@ -88,7 +88,7 @@ class MembersSignupForm extends Form
         $this
             ->add('nationality', 'text')
             ->add('is_singapore_pr', 'checkbox', ['label' => 'Singapore PR?'])
-            ->add('nric', 'text', ['label' => 'NRIC'])
+            ->add('nric', 'text', ['label' => 'NRIC (Upper Case)'])
             ->add('scholarship_id', 'entity', [
                 'label' => 'Scholarship',
                 'class' => 'App\Scholarship',

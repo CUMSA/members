@@ -156,7 +156,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-    	Frozennode\Administrator\AdministratorServiceProvider::class,
+        Frozennode\Administrator\AdministratorServiceProvider::class,
         CUMSA\Raven\RavenServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
@@ -210,8 +210,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'University'  => App\University::class,
+        'Member'      => App\Member::class,
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
     ],
-
 ];

@@ -2,7 +2,7 @@
 
 @section('panel-cols', '8')
 @section('panel-offset', '2')
-@section('panel-heading', 'Member Registration')
+@section('panel-heading', 'Update Profile')
 @section('panel-body')
     @parent
 
@@ -16,7 +16,7 @@
             {!! Session::get('alert-success') !!}
         </div>
     @endif
-
+    
     @if(Session::has('alert-warning'))
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert">×</a>

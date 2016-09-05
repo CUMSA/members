@@ -46,7 +46,7 @@ class SignupController extends Controller
             'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
         ]);
         if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
         $member = Member::create($request->all());
@@ -67,9 +67,9 @@ class SignupController extends Controller
     public function saveFresher(Request $request)
     {
         $form = $this->form(FreshersSignupForm::class);
-        $form->validate(Member::rules(true), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
+        $form->validate($this->fresherRules(true), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
         if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
         $fresher = Member::create($request->all());
@@ -91,5 +91,34 @@ class SignupController extends Controller
         });
 
         return redirect()->route('member.signup.fresher')->with('alert-success', 'Thanks ' . $fresher->first_name . '! You have successfully signed up.');
+    }
+
+    public function fresherRules($strict = false)
+    {
+        $rules = [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'date_of_birth' => 'sometimes|required|dateformat:Y-m-d',
+            'email_other' => 'required|email',
+			// 'email_hermes' => 'sometimes|required|email',
+            'mobile_home' => 'sometimes|required',
+			// 'address_uk' => 'sometimes|required',
+            'start_year' => 'required|integer|digits:4',
+            'end_year' => 'required|integer|digits:4',
+            'nationality' => 'required',
+            'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
+            'college_id' => 'required',
+            'course_id' => 'required',
+            'scholarship_id' => 'required',
+			// 'release_info' => 'accepted',
+			// 'membership_type' => ['sometimes', 'required', 'in:' . implode(',', static::$options_allowed_membership_type)],
+        ];
+        if ($strict) {
+            $rules = array_merge($rules, [
+                'previous_school' => 'sometimes|required',
+            ]);
+        }
+        return $rules;
     }
 }

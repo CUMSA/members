@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     <ul>
-                        <li>Edit profile</li>
+                        <li><a href={!! route('member.profile') !!}>Edit profile</a></li>
                         <li>View event registrations</li>
                     </ul>
                 </div>
