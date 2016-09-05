@@ -95,30 +95,12 @@ class SignupController extends Controller
 
     public function fresherRules($strict = false)
     {
-        $rules = [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'date_of_birth' => 'sometimes|required|dateformat:Y-m-d',
-            'email_other' => 'required|email',
-			// 'email_hermes' => 'sometimes|required|email',
-            'mobile_home' => 'sometimes|required',
-			// 'address_uk' => 'sometimes|required',
-            'start_year' => 'required|integer|digits:4',
-            'end_year' => 'required|integer|digits:4',
-            'nationality' => 'required',
-            'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
-            'college_id' => 'required',
-            'course_id' => 'required',
-            'scholarship_id' => 'required',
-			// 'release_info' => 'accepted',
-			// 'membership_type' => ['sometimes', 'required', 'in:' . implode(',', static::$options_allowed_membership_type)],
-        ];
-        if ($strict) {
-            $rules = array_merge($rules, [
-                'previous_school' => 'sometimes|required',
-            ]);
-        }
+        $rules = Member::rules($strict);
+        unset($rules['release_info']);
+        unset($rules['membership_type']);
+        unset($rules['email_hermes']);
+        unset($rules['address_uk']);
+
         return $rules;
     }
 }

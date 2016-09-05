@@ -50,23 +50,10 @@ class ProfileController extends Controller
     }
     
     public function profileRules(){
-        $rules = [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'gender' => 'required',
-            'date_of_birth' => 'sometimes|required|dateformat:Y-m-d',
-            'email_other' => 'required|email',
-            'email_hermes' => 'sometimes|required|email|regex:/^[\w\W]*cam.ac.uk$/',
-            'mobile_uk' => 'sometimes|required',
-            'address_uk' => 'sometimes|required',
-            'start_year' => 'required|integer|digits:4',
-            'end_year' => 'required|integer|digits:4',
-            'nationality' => 'required',
-            'nric' => ['regex:/^[STFG]\d{7}[A-Z]$/', 'nricformat'],
-            'college_id' => 'required',
-            'course_id' => 'required',
-            'scholarship_id' => 'required',
-        ];
+        $rules = Member::rules(false);
+        unset($rules['release_info']);
+        unset($rules['membership_type']);
         return $rules;
     }
 }
+
