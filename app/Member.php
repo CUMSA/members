@@ -67,7 +67,7 @@ class Member extends Model
     public static $options_allowed_membership_type = array('1 year', 'Life');
     public static $options_membership_type_with_cost = array('1 year (£8)', 'Life (£15)');
 
-    public static function rules($strict = false)
+    public static function rules($option, $strict = false)
     {
         $rules = [
             'first_name' => 'required',
@@ -75,9 +75,7 @@ class Member extends Model
             'gender' => 'required',
             'date_of_birth' => 'sometimes|required|dateformat:Y-m-d',
             'email_other' => 'required|email',
-            'email_hermes' => 'sometimes|required|email',
-            'mobile_uk' => 'sometimes|required',
-            'address_uk' => 'sometimes|required',
+            'email_hermes' => 'sometimes|required|email|regex:/^[\w\W]*cam.ac.uk$/',
             'start_year' => 'required|integer|digits:4',
             'end_year' => 'required|integer|digits:4',
             'nationality' => 'required',
@@ -85,9 +83,36 @@ class Member extends Model
             'college_id' => 'required',
             'course_id' => 'required',
             'scholarship_id' => 'required',
+            'mobile_uk' => 'sometimes|required',
+            'address_uk' => 'sometimes|required',
             'release_info' => 'accepted',
             'membership_type' => ['sometimes', 'required', 'in:' . implode(',', static::$options_allowed_membership_type)],
         ];
+
+        if ($option === 'member')
+        {
+            // Do nothing because $rules is already correct
+        }
+
+        elseif ($option === 'fresher')
+        {
+            unset($rules['email_hermes']);
+            unset($rules['mobile_uk']);
+            unset($rules['address_uk']);
+            unset($rules['release_info']);
+            unset($rules['membership_type']);
+        }
+
+        elseif ($option === 'profile')
+        {
+            unset($rules['release_info']);
+            unset($rules['membership_type']);
+        }
+
+        else {
+            return redirect()->back()->with('alert-warning', 'Wrong option passed to rules function in Member model');
+        }
+
         if ($strict) {
             $rules = array_merge($rules, [
                 'previous_school' => 'sometimes|required',

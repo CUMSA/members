@@ -28,7 +28,8 @@ class User extends Authenticatable
         'crsid',
     ];
 
-    public function hasRole($role) {
+    public function hasRole($role)
+    {
         switch ($role) {
             case 'editor': return (bool)$this->role_editor; break;
             case 'viewer': return (bool)$this->role_viewer; break;
@@ -36,7 +37,8 @@ class User extends Authenticatable
         return false;
     }
 
-    public function member(){
+    public function member()
+    {
         return $this->hasOne('App\Member', 'crsid', 'crsid');
     }
 }
