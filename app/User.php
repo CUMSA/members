@@ -36,7 +36,7 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getModel(){
-        return Member::where('crsid',$this->crsid)->first();
+    public function member(){
+        return $this->hasOne('App\Member', 'crsid', 'crsid');
     }
 }

@@ -18,8 +18,7 @@ class ProfileController extends Controller
 
     public function show()
     {
-        $user = Auth::user();
-        $member = $user->getModel();
+        $member = Auth::user()->member;
 
         $form = $this->form(UpdateProfileForm::class,[
             'method' => 'POST',
