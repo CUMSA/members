@@ -54,7 +54,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'SignupController@showFresher']);
     Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'SignupController@saveFresher']);
 	
-	Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show']);
+	Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
 	Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
 
 });

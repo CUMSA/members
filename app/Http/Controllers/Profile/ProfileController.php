@@ -19,13 +19,7 @@ class ProfileController extends Controller
     public function show()
     {
         $user = Auth::user();
-        
-        if($user === null){
-            Session::put('alert-login', 'Please login to view/update your profile');
-            return redirect('login');
-        }
-
-        $member = Member::where('crsid',$user->crsid)->first();
+        $member = $user->getModel();
 
         $form = $this->form(UpdateProfileForm::class,[
             'method' => 'POST',
