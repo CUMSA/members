@@ -67,6 +67,8 @@ class Member extends Model
     public static $options_allowed_membership_type = array('1 year', 'Life');
     public static $options_membership_type_with_cost = array('1 year (£8)', 'Life (£15)');
 
+    // Default value of rules returned if $option is anything but 'fresher' and 'profile'
+
     public static function rules($option, $strict = false)
     {
         $rules = [
@@ -89,12 +91,7 @@ class Member extends Model
             'membership_type' => ['sometimes', 'required', 'in:' . implode(',', static::$options_allowed_membership_type)],
         ];
 
-        if ($option === 'member')
-        {
-            // Do nothing because $rules is already correct
-        }
-
-        elseif ($option === 'fresher')
+        if ($option === 'fresher')
         {
             unset($rules['email_hermes']);
             unset($rules['mobile_uk']);
@@ -107,10 +104,6 @@ class Member extends Model
         {
             unset($rules['release_info']);
             unset($rules['membership_type']);
-        }
-
-        else {
-            return redirect()->back()->with('alert-warning', 'Wrong option passed to rules function in Member model');
         }
 
         if ($strict) {
