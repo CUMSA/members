@@ -23,7 +23,7 @@ class SignupController extends Controller
             'url' => route('member.signup.save'),
         ]);
         return view('members.signup.index', compact('form'))->with([
-            'validator' => JsValidator::make(Member::rules(true)),
+            'validator' => JsValidator::make(Member::rules('member', true)),
         ]);
     }
 
@@ -34,19 +34,19 @@ class SignupController extends Controller
             'url' => route('member.signup.fresher.save'),
         ]);
         return view('members.signup.fresher', compact('form'))->with([
-            'validator' => JsValidator::make(Member::rules(true)),
+            'validator' => JsValidator::make(Member::rules('member', true)),
         ]);
     }
 
     public function save(Request $request)
     {
         $form = $this->form(MembersSignupForm::class);
-        $form->validate(Member::rules(true), [
+        $form->validate(Member::rules('member', true), [
             'nricformat' => 'NRIC checksum failed. Try checking it again.',
             'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
         ]);
         if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
         $member = Member::create($request->all());
@@ -67,9 +67,9 @@ class SignupController extends Controller
     public function saveFresher(Request $request)
     {
         $form = $this->form(FreshersSignupForm::class);
-        $form->validate(Member::rules(true), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
+        $form->validate(Member::rules('fresher', true), ['nricformat' => 'NRIC checksum failed. Try checking it again.']);
         if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
         $fresher = Member::create($request->all());

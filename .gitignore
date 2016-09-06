@@ -15,3 +15,6 @@ storage/
 .travis/cumsa_ci_rsa
 public/packages
 *~
+
+# Files for PHPStorm
+.idea
