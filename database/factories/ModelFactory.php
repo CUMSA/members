@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,11 +13,24 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Event::class, function (Faker\Generator $faker) {
     return [
+        'id' => $faker->unique()->numberBetween(1,9),
         'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'datetime_start' => Carbon::now(),
+        'datetime_end' => Carbon::now(),
+        'description' => $faker->sentence(10),
+        'location' => 'Singapore',
+        'comments' => 'This is a test event',
+    ];
+});
+
+$factory->define(App\EventAttendee::class, function (Faker\Generator $faker) {
+    return [
+        'id' => 1,
+        'event_id' => $faker->unique()->randomDigitNotNull(1,8),
+        'time_admitted' => Carbon::now(),
+        'comments' => 'This is a test attendee',
+        'crsid' => 'hlt38',
     ];
 });

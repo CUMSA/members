@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <ul>
                         <li><a href={!! route('member.profile') !!}>Edit profile</a></li>
-                        <li>View event registrations</li>
+                        <li><a href={!! route('member.view.events') !!}>View event registrations</a></li>
                     </ul>
                 </div>
             </div>

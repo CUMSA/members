@@ -114,6 +114,24 @@ class Member extends Model
         return $rules;
     }
 
+    public function eventattendee()
+    {
+        return $this->hasMany('App\EventAttendee', 'crsid', 'crsid');
+    }
+
+    // Get all instances where this Member was an attendee, then get the corresponding event
+    public function getEvents()
+    {
+        $events = array();
+        $attendees = $this->eventattendee;
+
+        foreach ($attendees as $attendee)
+        {
+            array_push($events, Event::find($attendee->event_id));
+        }
+        return $events;
+    }
+
     public function college()
     {
         return $this->belongsTo('App\College');
