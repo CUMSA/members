@@ -64,7 +64,7 @@ Route::group(['middleware' => ['web']], function () {
         return View::make('events.index')
             ->with('events', $events)
             ->with('cumsaweb_events', $cumsaweb_events);
-    })->middleware('auth');
+    })->middleware('auth')->name('events.index');
 });
 
 // Committee routes.
