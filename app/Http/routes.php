@@ -57,8 +57,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
 	Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
 
-    Route::get('/view_events', ['as' => 'member.view.events', 'uses' => 'Events\EventsController@show'])->middleware('auth');
+    Route::get('/myevents', function() {
+        $events = Auth::user()->member->getEvents();
+        $cumsaweb_events = "http://cumsa.org/category/intevents";
 
+        return View::make('events.index')
+            ->with('events', $events)
+            ->with('cumsaweb_events', $cumsaweb_events);
+    })->middleware('auth');
 });
 
 // Committee routes.
