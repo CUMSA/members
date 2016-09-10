@@ -45,6 +45,7 @@ class Member extends Model
         'previous_school',
         'start_year',
         'end_year',
+        'dietary_req',
     );
 
     /**
