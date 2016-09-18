@@ -10,8 +10,20 @@
 
             <div class="panel-body">
                 <p>
+                    <b><u>Columns</u></b><br>
+                    <div id="columnControls">
+                        <input type="checkbox" name="crsid" checked="checked"><span style="margin-right:1em"> CRSid</span>
+                        <input type="checkbox" name="bio" checked="checked"><span style="margin-right:1em"> Bio</span>
+                        <input type="checkbox" name="nationality" checked="checked"><span style="margin-right:1em"> Nationality</span>
+                        <input type="checkbox" name="college" checked="checked"><span style="margin-right:1em"> College</span>
+                        <input type="checkbox" name="course" checked="checked"><span style="margin-right:1em"> Course/Scholarship/Previous School</span>
+                        <input type="checkbox" name="email" checked="checked"><span style="margin-right:1em"> Email</span>
+                        <input type="checkbox" name="contact" checked="checked"><span style="margin-right:1em"> Contact</span>
+                        <input type="checkbox" name="address" checked="checked"><span style="margin-right:1em"> Address</span>
+                        <input type="checkbox" name="remarks" checked="checked"><span style="margin-right:1em"> Remarks</span>
+                    </div>
+                    <br>
                     <button id='export' class='btn btn-success'>Export as CSV</button>
-                    <!-- TODO: Chose columns to show/hide -->
                     <!-- TODO: Checkbox to show only current members -->
                 </p>
                 <div id="hot"></div>
@@ -19,7 +31,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.js"></script>
 <link href="https://handsontable.com/static/bower_components/handsontable-pro/dist/handsontable.full.css" type="text/css" rel="stylesheet">
@@ -105,16 +116,42 @@
             hiddenColumns: true,
             dropdownMenu: ['filter_by_value', 'filter_by_condition', 'filter_action_bar'],
             filters: true,
+            preventOverflow: "horizontal",
         });
+
+        var inst = $('#hot').handsontable('getInstance');
         setTimeout(function() {
-            var inst = $('#hot').handsontable('getInstance');
             inst.getPlugin('collapsibleColumns').collapseAll();
             $('#export').click(function() {
                 inst.getPlugin('exportFile').downloadFile('csv', {
                     filename: 'members-filtered'
-              });
+                });
             });
         }, 500);
+
+        var colIndexes = {
+            "crsid"         : [0],
+            "bio"           : [1, 2, 3, 4, 5],
+            "nationality"   : [6, 7, 8],
+            "college"       : [9],
+            "course"        : [10, 11, 12, 13],
+            "email"         : [14, 15],
+            "contact"       : [16, 17],
+            "address"       : [18, 19],
+            "remarks"       : [20]
+        }
+
+        $('#columnControls').find('[type=checkbox]').change(function() {
+            if($(this).prop('checked'))
+            {
+                inst.getPlugin('hiddenColumns').showColumns(colIndexes[$(this).prop('name')]);
+            }
+            else
+            {
+                inst.getPlugin('hiddenColumns').hideColumns(colIndexes[$(this).prop('name')]);
+            }
+            inst.render();
+        });
     });
 </script>
 @endsection
