@@ -57,12 +57,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
 	Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
 
-    Route::get('/database', ['as' => 'member.database', 'uses' => 'Members\MembersController@show']);
-
 });
 
 // Committee routes.
 Route::group(['middleware' => ['web'], 'prefix' => 'comm/'], function () {
     Route::get('members', ['as' => 'comm.members', 'uses' => 'Committee\MemberController@index']);
-    Route::post('members', ['as' => 'comm.members.reload', 'uses' => 'Committee\MemberController@reload']);
 });

@@ -210,7 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Input' => Illuminate\Support\Facades\Input::class,
+        'University'  => App\University::class,
         'Member'      => App\Member::class,
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,

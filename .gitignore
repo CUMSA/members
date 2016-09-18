@@ -18,8 +18,3 @@ public/packages
 
 # Files for PHPStorm
 .idea
-
-# Seeder files for testing 
-database/seeds/EventsTableSeeder.php
-database/seeds/MembersTableSeeder.php
-database/seeds/AttendeesTableSeeder.php
