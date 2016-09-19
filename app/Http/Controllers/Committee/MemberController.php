@@ -17,7 +17,8 @@ class MemberController extends Controller
         $this->middleware('admin.view');
     }
 
-    public function index() {
+    public function index()
+    {
         return view('committee/members', [
             'membersJson' => Member::with('college', 'course', 'scholarship')->get()->toJson(),
         ]);
