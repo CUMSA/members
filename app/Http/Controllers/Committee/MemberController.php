@@ -19,8 +19,8 @@ class MemberController extends Controller
 
     public function index()
     {
-        return view('committee/members', [
+        return view('committee/table', [
             'membersJson' => Member::with('college', 'course', 'scholarship')->get()->toJson(),
-        ]);
+            ]);
     }
 }

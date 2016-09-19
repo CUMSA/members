@@ -57,6 +57,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
 	Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
 
+    Route::get('directory', ['as' => 'member.directory', 'uses' => 'Directory\DirectoryController@show'])->middleware('auth');
 });
 
 // Committee routes.
