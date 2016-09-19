@@ -10,19 +10,23 @@
 
             <div class="panel-body">
                 <p>
-                    <b><u>Columns</u></b><br>
+                    <h4><b>Columns</b></h4>
                     <div id="columnControls">
-                        <input type="checkbox" name="crsid" checked="checked"><span style="margin-right:1em"> CRSid</span>
-                        <input type="checkbox" name="bio" checked="checked"><span style="margin-right:1em"> Bio</span>
-                        <input type="checkbox" name="nationality" checked="checked"><span style="margin-right:1em"> Nationality</span>
-                        <input type="checkbox" name="college" checked="checked"><span style="margin-right:1em"> College</span>
-                        <input type="checkbox" name="course" checked="checked"><span style="margin-right:1em"> Course/Scholarship/Previous School</span>
-                        <input type="checkbox" name="email" checked="checked"><span style="margin-right:1em"> Email</span>
-                        <input type="checkbox" name="contact" checked="checked"><span style="margin-right:1em"> Contact</span>
-                        <input type="checkbox" name="address" checked="checked"><span style="margin-right:1em"> Address</span>
-                        <input type="checkbox" name="remarks" checked="checked"><span style="margin-right:1em"> Remarks</span>
+                        <label><input type="checkbox" name="crsid" checked> CRSid</label>
+                        <label><input type="checkbox" name="bio" checked> Bio</label>
+                        <label><input type="checkbox" name="nationality" checked> Nationality</label>
+                        <label><input type="checkbox" name="college" checked> College</label>
+                        <label><input type="checkbox" name="course" checked> Course/Scholarship/Previous School</label>
+                        <label><input type="checkbox" name="email" checked> Email</label>
+                        <label><input type="checkbox" name="contact" checked> Contact</label>
+                        <label><input type="checkbox" name="address" checked> Address</label>
+                        <label><input type="checkbox" name="remarks" checked> Remarks</label>
                     </div>
-                    <br>
+                    <style>
+                        label {
+                            padding-right: 15px;
+                        }
+                    </style>
                     <button id='export' class='btn btn-success'>Export as CSV</button>
                     <!-- TODO: Checkbox to show only current members -->
                 </p>
