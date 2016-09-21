@@ -4,19 +4,19 @@
 @endsection
 
 @section('buttons')
-<div id="columnControls">
-    <label><input type="checkbox" name="crsid" checked> CRSid</label>
-    <label><input type="checkbox" name="bio" checked> Bio</label>
-    <label><input type="checkbox" name="nationality" checked> Nationality</label>
-    <label><input type="checkbox" name="college" checked> College</label>
-    <label><input type="checkbox" name="course" checked> Course/Scholarship/Previous School</label>
-    <label><input type="checkbox" name="email" checked> Email</label>
-    <label><input type="checkbox" name="contact" checked> Contact</label>
-    <label><input type="checkbox" name="address" checked> Address</label>
-    <label><input type="checkbox" name="remarks" checked> Remarks</label>
-    <h4><button id='export' class='btn btn-success'>Export as CSV</button></h4>
-
-</div>
+    <h4><b>Columns</b></h4>
+    <div id="columnControls">
+        <label><input type="checkbox" name="crsid" checked> CRSid</label>
+        <label><input type="checkbox" name="bio" checked> Bio</label>
+        <label><input type="checkbox" name="nationality" checked> Nationality</label>
+        <label><input type="checkbox" name="college" checked> College</label>
+        <label><input type="checkbox" name="course" checked> Course/Scholarship/Previous School</label>
+        <label><input type="checkbox" name="email" checked> Email</label>
+        <label><input type="checkbox" name="contact" checked> Contact</label>
+        <label><input type="checkbox" name="address" checked> Address</label>
+        <label><input type="checkbox" name="remarks" checked> Remarks</label>
+        <h4><button id='export' class='btn btn-success'>Export as CSV</button></h4>
+    </div>
 @endsection
 
 @section('tablescript')

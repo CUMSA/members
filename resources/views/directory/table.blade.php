@@ -3,16 +3,6 @@
     <div class="panel-heading">Members Directory</div>
 @endsection
 
-@section('buttons')
-    <div id="columnControls">
-        <label><input type="checkbox" name="name" checked> Name</label>
-        <label><input type="checkbox" name="course" checked> Course</label>
-        <label><input type="checkbox" name="college" checked> College</label>
-        <label><input type="checkbox" name="startYr" checked> Start Year</label>
-        <label><input type="checkbox" name="endYr" checked> End Year</label>
-    </div>
-@endsection
-
 @section('tablescript')
     <script>
         $(document).ready(function() {

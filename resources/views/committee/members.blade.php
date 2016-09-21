@@ -11,8 +11,6 @@
 
             <div class="panel-body">
                 <p>
-                    <h4><b>Columns</b></h4>
-
                     @yield('buttons')
 
                     <style>
