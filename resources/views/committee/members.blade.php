@@ -20,7 +20,6 @@
                             padding-right: 15px;
                         }
                     </style>
-                    <button id='export' class='btn btn-success'>Export as CSV</button>
                     <!-- TODO: Checkbox to show only current members -->
                 </p>
                 <div id="hot"></div>

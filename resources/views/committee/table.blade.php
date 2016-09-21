@@ -1,5 +1,4 @@
 @extends('committee.members')
-
 @section('panel-heading')
 <div class="panel-heading">Committee Members Dashboard</div>
 @endsection
@@ -15,6 +14,8 @@
     <label><input type="checkbox" name="contact" checked> Contact</label>
     <label><input type="checkbox" name="address" checked> Address</label>
     <label><input type="checkbox" name="remarks" checked> Remarks</label>
+    <h4><button id='export' class='btn btn-success'>Export as CSV</button></h4>
+
 </div>
 @endsection
 

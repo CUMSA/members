@@ -22,10 +22,20 @@ class Member extends Model
      *
      * @var array
      */
-    protected $fillable = array(
+    protected $visible = [
         'last_name',
         'first_name',
         'gender',
+        'college_id',
+        'course_id',
+        'start_year',
+        'end_year',
+        'college_name',
+        'course_name',
+        'full_name',
+    ];
+
+    protected $hidden = [
         'date_of_birth',
         'nationality',
         'is_singapore_pr',
@@ -39,13 +49,9 @@ class Member extends Model
         'address_home',
         'address_uk',
         'release_info',
-        'college_id',
-        'course_id',
         'scholarship_id',
         'previous_school',
-        'start_year',
-        'end_year',
-    );
+    ];
 
     /**
      * The attributes that aren't mass assignable.
@@ -66,6 +72,14 @@ class Member extends Model
     public static $options_membership_type = array('Non-member', '1 year', 'Life');
     public static $options_allowed_membership_type = array('1 year', 'Life');
     public static $options_membership_type_with_cost = array('1 year (£8)', 'Life (£15)');
+
+    public function setAllVisible()
+    {
+        $this->addVisible($this->getHidden());
+        $this->addVisible($this->guarded);
+        $this->addVisible($this->appends);
+        return $this;
+    }
 
     // Default value of rules returned if $option is anything but 'fresher' and 'profile'
 

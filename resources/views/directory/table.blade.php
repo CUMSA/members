@@ -1,5 +1,4 @@
 @extends('committee.members')
-
 @section('panel-heading')
     <div class="panel-heading">Members Directory</div>
 @endsection
