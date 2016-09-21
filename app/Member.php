@@ -35,7 +35,17 @@ class Member extends Model
         'full_name',
     ];
 
-    protected $hidden = [
+    protected $fillable = [
+        'last_name',
+        'first_name',
+        'gender',
+        'college_id',
+        'course_id',
+        'start_year',
+        'end_year',
+        'college_name',
+        'course_name',
+        'full_name',
         'date_of_birth',
         'nationality',
         'is_singapore_pr',
@@ -58,7 +68,7 @@ class Member extends Model
      *
      * @var array
      */
-    protected $guarded = array(
+    protected $private_variables = array(
         'registration_time',
         'membership_type',
         'is_fee_paid',
@@ -75,8 +85,8 @@ class Member extends Model
 
     public function setAllVisible()
     {
-        $this->addVisible($this->getHidden());
-        $this->addVisible($this->guarded);
+        $this->addVisible($this->fillable);
+        $this->addVisible($this->private_variables);
         $this->addVisible($this->appends);
         return $this;
     }

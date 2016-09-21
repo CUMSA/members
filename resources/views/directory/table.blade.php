@@ -11,15 +11,10 @@
                 data: dataObj, // see the Data tab
                 columns: [
                     { data: "full_name" },
-
                     { data: "gender" },
-
                     { data: "college_name" },
-
                     { data: "course_name" },
-
                     { data: "start_year"},
-
                     { data: "end_year"},
                 ],
                 nestedHeaders: [
