@@ -53,11 +53,17 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'SignupController@showFresher']);
     Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'SignupController@saveFresher']);
-
-    Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
-    Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
+	
+	Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
+	Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
 
     Route::get('directory', ['as' => 'member.directory', 'uses' => 'Directory\DirectoryController@show'])->middleware('auth');
+
+    Route::get('internlink', ['as' => 'internlink', 'uses' => 'Internlink\InternlinkController@show'])->middleware('auth');
+
+    Route::get('internlink/signup', ['as' => 'internlink.signup', 'uses' => 'Internlink\InternlinkController@signup'])->middleware('auth');
+    Route::post('internlink/signup', ['as' => 'internlink.signup.save', 'uses' => 'Internlink\InternlinkController@save'])->middleware('auth');
+
 });
 
 // Committee routes.
