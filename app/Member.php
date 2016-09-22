@@ -85,9 +85,7 @@ class Member extends Model
 
     public function setAllVisible()
     {
-        $this->addVisible($this->fillable);
-        $this->addVisible($this->private_variables);
-        $this->addVisible($this->appends);
+        $this->setVisible([]);
         return $this;
     }
 
