@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Link;
 use App\Forms\InternlinkSignupForm;
 use JsValidator;
+use Auth;
 
 class InternlinkController extends Controller
 {
@@ -21,8 +22,11 @@ class InternlinkController extends Controller
 
     public function signup()
     {
+        $member = Auth::user()->member;
+
         $form = $this->form(InternlinkSignupForm::class,[
             'method' => 'POST',
+            'model' => $member,
             'url' => route('internlink.signup.save'),
         ]);
 
@@ -31,8 +35,14 @@ class InternlinkController extends Controller
         ]);
     }
 
-    public function save()
+    public function save(Request $request)
     {
-
+        $form = $this->form(InternlinkSignupForm::class);
+        $form->validate(Link::rules(), [
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM',
+        ]);
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
+        }
     }
 }

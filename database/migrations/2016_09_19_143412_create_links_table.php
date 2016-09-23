@@ -14,10 +14,9 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('contact_number')->nullable();
-            $table->string('email_address');
+            $table->integer('member_id');
 
+            $table->foreign('member_id')->references('id')->on('member');
             $table->timestamps();
         });
     }
