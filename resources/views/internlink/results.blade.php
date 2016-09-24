@@ -1,8 +1,8 @@
 @extends('layouts.panel')
-@section('panel-cols', '12')
-@section('panel-offset', '0')
+@section('panel-cols', '10')
+@section('panel-offset', '1')
 @section('panel-heading', 'InternLink')
 @section('panel-body')
-    {!! var_dump($request) !!}
+
 
 @endsection

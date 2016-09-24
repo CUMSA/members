@@ -17,7 +17,25 @@ class InternlinkController extends Controller
 
     public function show()
     {
-        return view('internlink.index');
+        $form = $this->form(InternlinkSearchForm::class,[
+            'method' => 'POST',
+            'url' => route('internlink.search'),
+        ]);
+
+        return view('internlink.index', compact('form'))->with([
+            'validator' => JsValidator::make($this->rules())
+        ]);
+    }
+
+    public function search()
+    {
+        $form = $this->form(InternlinkSignupForm::class);
+        $form->validate($this->rules());
+
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
+        }
+
     }
 
     public function signup()
@@ -44,5 +62,12 @@ class InternlinkController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
+    }
+
+    public function rules()
+    {
+        return [
+            'filter_by' => 'required',
+        ];
     }
 }

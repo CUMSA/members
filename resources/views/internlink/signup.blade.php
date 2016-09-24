@@ -3,7 +3,12 @@
 @section('panel-offset', '2')
 @section('panel-heading', 'Signup For InternLink')
 @section('panel-body')
-
+    @if(Session::has('alert-warning'))
+        <div class="alert alert-danger">
+            <a class="close" data-dismiss="alert">×</a>
+            {!! Session::get('alert-warning') !!}
+        </div>
+    @endif
     {!! form_start($form) !!}
     {!! form_until($form, 'describe_self') !!}
 
@@ -25,7 +30,11 @@
                 var proto = container.data('prototype').replace(/__NAME__/g, count);
                 container.append(proto);
             });
+            $('.form-control').on('click', function(e) {
+
+                e.preventDefault();
+                $('.form-control').trigger('click');
+            });
         });
     </script>
-
 @endsection

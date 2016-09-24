@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
+use App\Internship;
 
 class InternshipForm extends Form
 {
@@ -10,6 +11,11 @@ class InternshipForm extends Form
     {
         $this
             ->add('role_name', 'text', ['label' => 'Internship Role'])
+            ->add('related_field', 'select', [
+                'choices' => Internship::relatedFields(),
+                'selected' => 'en',
+                'empty_value' => 'Select'
+            ])
             ->add('company_name', 'text', ['label' => 'Company'])
             ->add('location', 'text', ['label' => 'Location'])
             ->add('description', 'textarea', [

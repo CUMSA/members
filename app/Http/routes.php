@@ -60,6 +60,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('directory', ['as' => 'member.directory', 'uses' => 'Directory\DirectoryController@show'])->middleware('auth');
 
     Route::get('internlink', ['as' => 'internlink', 'uses' => 'Internlink\InternlinkController@show'])->middleware('auth');
+    Route::post('internlink', ['as' => 'internlink.search', 'uses' => 'Internlink\InternlinkController@search'])->middleware('auth');
 
     Route::get('internlink/signup', ['as' => 'internlink.signup', 'uses' => 'Internlink\InternlinkController@signup'])->middleware('auth');
     Route::post('internlink/signup', ['as' => 'internlink.signup.save', 'uses' => 'Internlink\InternlinkController@save'])->middleware('auth');

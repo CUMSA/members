@@ -21,12 +21,12 @@ class Link extends Model
     {
         $rules = [
             'contact_options' => 'required',
-            'role_name' => 'required',
-            'company_name' => 'required',
-            'location' => 'required',
-            'description' => 'required',
-            'start_date' => 'required|dateformat:Y-m',
-            'end_date' => 'required|dateformat:Y-m',
+            'internship.*.role_name' => 'required',
+            'internship.*.company_name' => 'required',
+            'internship.*.location' => 'required',
+            'internship.*.description' => 'required',
+            'internship.*.start_date' => 'required|dateformat:Y-m',
+            'internship.*.end_date' => 'required|dateformat:Y-m',
         ];
         return $rules;
     }

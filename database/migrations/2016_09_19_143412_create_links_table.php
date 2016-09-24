@@ -14,9 +14,9 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('member_id');
+            $table->integer('member_id')->unsigned();
 
-            $table->foreign('member_id')->references('id')->on('member');
+            $table->foreign('member_id')->references('id')->on('members');
             $table->timestamps();
         });
     }
