@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Link;
 use App\Forms\InternlinkSignupForm;
+use App\Forms\InternlinkSearchForm;
 use JsValidator;
 use Auth;
 
@@ -27,7 +28,7 @@ class InternlinkController extends Controller
         ]);
     }
 
-    public function search()
+    public function search(Request $request)
     {
         $form = $this->form(InternlinkSignupForm::class);
         $form->validate($this->rules());
@@ -35,6 +36,7 @@ class InternlinkController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
+
 
     }
 

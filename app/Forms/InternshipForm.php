@@ -13,7 +13,7 @@ class InternshipForm extends Form
             ->add('role_name', 'text', ['label' => 'Internship Role'])
             ->add('related_field', 'select', [
                 'choices' => Internship::relatedFields(),
-                'selected' => 'en',
+                'selected' => 'Select',
                 'empty_value' => 'Select'
             ])
             ->add('company_name', 'text', ['label' => 'Company'])

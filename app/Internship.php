@@ -14,18 +14,15 @@ class Internship extends Model
     public static function relatedFields()
     {
         return [
-            'label' => 'Filter:',
-            'choices' => [
-                'tech' => 'Information Technology',
-                'finance' => 'Finance',
-                'engin' => 'Engineering',
-                'edu' => 'Education',
-                'science' => 'Science',
-                'law' => 'Law',
-                'arts' => 'The Arts',
-                'consult' => 'Consultancy',
-                'other' => 'Other',
-            ]
+            'tech' => 'Information Technology',
+            'finance' => 'Finance',
+            'engin' => 'Engineering',
+            'edu' => 'Education',
+            'science' => 'Science',
+            'law' => 'Law',
+            'arts' => 'The Arts',
+            'consult' => 'Consultancy',
+            'other' => 'Other',
         ];
     }
 }
