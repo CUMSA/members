@@ -23,9 +23,9 @@
     </table>
     <style>
         #results {
-
+            background-color: #e7f5fe;
         }
-        tr:hover {
+        .clickable-row:hover {
             background-color: #f5f5f5;
             cursor: pointer;
         }
@@ -33,6 +33,8 @@
             text-align: left;
             padding: 8px;
             width: 300px;
+            border: 1px solid white;
+            border-radius: 7px;
         }
         th {
             background-color: #000080;

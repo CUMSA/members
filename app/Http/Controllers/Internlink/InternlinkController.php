@@ -24,9 +24,11 @@ class InternlinkController extends Controller
             'url' => route('internlink.search'),
         ]);
 
+        $internship_count = Internship::all()->count();
+
         return view('internlink.index', compact('form'))->with([
             'validator' => JsValidator::make($this->rules())
-        ]);
+        ])->with('internship_count', $internship_count);
     }
 
     public function search(Request $request)
@@ -72,6 +74,32 @@ class InternlinkController extends Controller
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
+    }
+
+    public function viewInternship($id)
+    {
+        $internship = Internship::where('id', $id)->get()->first();
+        $link = $internship->link;
+        $member = $link->member;
+
+        $member_details = ['name' => $member->full_name];
+
+        if($link->show_uk_phone == 1){
+            $member_details = array_merge($member_details, ['mobile_uk' => $member->mobile_uk]);
+        }
+        if($link->show_home_phone == 1){
+            $member_details = array_merge($member_details, ['mobile_home' => $member->mobile_home]);
+        }
+        if($link->show_hermes_email){
+            $member_details = array_merge($member_details, ['email_hermes' => $member->email_hermes]);
+        }
+        if($link->show_other_email){
+            $member_details = array_merge($member_details, ['email_other' => $member->email_other]);
+        }
+
+        return view('internlink.internship')
+            ->with('member_details', $member_details)
+            ->with('internship', $internship);
     }
 
     public function rules()

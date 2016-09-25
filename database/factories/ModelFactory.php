@@ -53,17 +53,21 @@ $factory->define(App\Member::class, function (Faker\Generator $faker) {
 $factory->define(App\Link::class, function (Faker\Generator $faker) {
     return [
         'member_id' => 1,
+        'show_uk_phone' => 1,
+        'show_home_phone' => $faker->numberBetween(0, 1),
+        'show_hermes_email' => $faker->numberBetween(0, 1),
+        'show_other_email' => $faker->numberBetween(0, 1),
     ];
 });
 
 $factory->define(App\Internship::class, function (Faker\Generator $faker) {
     return [
         'link_id' => 1,
-        'role_name' => str_random(5),
+        'role_name' => "Test role name",
         'related_field' => 'Other',
         'company_name' => 'Test Company',
-        'description' => str_random(15),
-        'location' => 'Singapore',
+        'description' => $faker->realText(200),
+        'location' => 'Sao Tome and Principe',
         'start_date' => '2012-12',
         'end_date' => '2013-12',
     ];
