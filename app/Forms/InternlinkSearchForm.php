@@ -12,6 +12,7 @@ class InternlinkSearchForm extends Form
         $this
             ->add('filter_by', 'choice', [
                 'choices' => Internship::relatedFields(),
+                'selected' => array_keys(Internship::relatedFields()),
                 'multiple' => true,
                 'expanded' => true,
             ])
