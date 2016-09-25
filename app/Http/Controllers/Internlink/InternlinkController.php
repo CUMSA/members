@@ -47,6 +47,11 @@ class InternlinkController extends Controller
             $internships = $internships->merge(Internship::where('related_field', $condition)->get());
         }
 
+        if($internships->count() == 0)
+        {
+            return view('internlink.empty');
+        }
+
         return view('internlink.results')->with('internships', $internships);
     }
 
