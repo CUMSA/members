@@ -38,14 +38,14 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $links = collect();
+        $internships = collect();
         $conditions = $request['filter_by'];
         foreach ($conditions as $condition)
         {
-            $links->merge(Internship::where('related_field', $condition)->get());
+            $internships = $internships->merge(Internship::where('related_field', $condition)->get());
         }
 
-        return view('internlink.results')->with('links', $links);
+        return view('internlink.results')->with('internships', $internships);
     }
 
     public function signup()

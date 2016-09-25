@@ -65,6 +65,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('internlink/signup', ['as' => 'internlink.signup', 'uses' => 'Internlink\InternlinkController@signup'])->middleware('auth');
     Route::post('internlink/signup', ['as' => 'internlink.signup.save', 'uses' => 'Internlink\InternlinkController@save'])->middleware('auth');
 
+    Route::get('internlink/{internship_id}', ['as' => 'internlink.internship', 'uses' => 'Internlink\InternlinkController@viewInternship'])->middleware('auth');
+
 });
 
 // Committee routes.
