@@ -107,6 +107,13 @@ class InternlinkController extends Controller
             ->with('internship', $internship);
     }
 
+    public function viewAll()
+    {
+        $internships = Internship::all();
+        return view('internlink.results')->with('internships', $internships);
+
+    }
+
     public function rules()
     {
         return [
