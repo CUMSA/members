@@ -1,4 +1,5 @@
 @extends('layouts.panel')
+{!! var_dump($_POST) !!}
 @section('panel-cols', '10')
 @section('panel-offset', '1')
 @section('panel-heading', 'InternLink')

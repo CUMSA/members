@@ -3,6 +3,6 @@
 @section('panel-offset', '1')
 @section('panel-heading', 'InternLink')
 @section('panel-body')
-
+{!! var_dump($links) !!}
 
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Internlink;
 
+use App\Internship;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -37,7 +38,14 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
+        $links = collect();
+        $conditions = $request['filter_by'];
+        foreach ($conditions as $condition)
+        {
+            $links->merge(Internship::where('related_field', $condition)->get());
+        }
 
+        return view('internlink.results')->with('links', $links);
     }
 
     public function signup()
