@@ -37,7 +37,7 @@
             border-radius: 7px;
         }
         th {
-            background-color: #000080;
+            background-color: #94b8b8;
             color: white;
         }
     </style>

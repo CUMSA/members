@@ -1,5 +1,4 @@
 @extends('layouts.panel')
-{!! var_dump($member_details) !!}
 @section('panel-cols', '10')
 @section('panel-offset', '1')
 @section('panel-heading', 'Internship Profile')
@@ -72,7 +71,7 @@
             border: 1px solid white;
         }
         #col1 {
-            background-color: #000080;
+            background-color: #94b8b8;
             color: white;
             width:200px;
         }
