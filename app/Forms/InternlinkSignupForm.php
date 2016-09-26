@@ -11,7 +11,6 @@ class InternlinkSignupForm extends Form
     {
         $this
             ->addBio()
-            ->addInternship()
             ->add('submit', 'submit');
     }
 
@@ -38,18 +37,6 @@ class InternlinkSignupForm extends Form
                 'label' => 'Write a short message about yourself!',
                 'attr' => ['rows' => 2],
 
-            ]);
-        return $this;
-    }
-
-    protected function addInternship()
-    {
-        $this
-            ->add('internship', 'collection', [
-                'type' => 'form',
-                'options' => [
-                    'class' => 'App\Forms\InternshipForm'
-                ]
             ]);
         return $this;
     }

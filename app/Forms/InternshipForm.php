@@ -23,6 +23,7 @@ class InternshipForm extends Form
                 'attr' => ['rows' => 5],
             ])
             ->add('start_date', 'date', ['label' => 'Start Date', 'default_value' => 'YYYY-MM'])
-            ->add('end_date', 'date', ['label' => 'End Date', 'default_value' => 'YYYY-MM']);
+            ->add('end_date', 'date', ['label' => 'End Date', 'default_value' => 'YYYY-MM'])
+            ->add('submit', 'submit');
     }
 }

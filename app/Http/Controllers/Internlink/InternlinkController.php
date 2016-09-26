@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Internlink;
 
 use App\Internship;
+use Illuminate\Support\Facades\Redirect;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Link;
 use App\Forms\InternlinkSignupForm;
 use App\Forms\InternlinkSearchForm;
+use App\Forms\InternshipForm;
 use JsValidator;
 use Auth;
 
@@ -66,11 +68,8 @@ class InternlinkController extends Controller
 
     public function signup()
     {
-        $member = Auth::user()->member;
-
         $form = $this->form(InternlinkSignupForm::class,[
             'method' => 'POST',
-            'model' => $member,
             'url' => route('internlink.signup.save'),
         ]);
 
@@ -82,12 +81,46 @@ class InternlinkController extends Controller
     public function save(Request $request)
     {
         $form = $this->form(InternlinkSignupForm::class);
-        $form->validate(Link::rules(), [
-            'dateformat' => 'Date should be a valid date of the format YYYY-MM',
+        $form->validate(Link::rules());
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
+        }
+
+        $link = new Link($request->all());
+        $link->member_id = Auth::user()->member->id;
+        $link->save();
+
+        return redirect()->route('internlink.signup.internship');
+    }
+
+    public function addInternship($alert_success = null)
+    {
+        $form = $this->form(InternshipForm::class,[
+            'method' => 'POST',
+            'url' => route('internlink.signup.internship.save'),
+        ]);
+
+        return view('internlink.signup', compact('form'))->with([
+            'validator' => JsValidator::make(Internship::rules()),
+        ]);
+    }
+
+    public function saveInternship(Request $request)
+    {
+        $form = $this->form(InternshipForm::class);
+        $form->validate(Internship::rules(), [
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
         ]);
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
+
+        $internship = new Internship($request->all());
+        $internship->link_id = Auth::user()->member->link->id;
+        $internship->save();
+
+        $success_msg = 'Your internship details have been saved! You may submit another internship if you wish.';
+        return redirect()->route('internlink.signup.internship')->with('alert-success', $success_msg);
     }
 
     public function viewInternship($id)
