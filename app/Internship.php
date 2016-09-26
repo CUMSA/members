@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Internship extends Model
 {
@@ -31,6 +32,16 @@ class Internship extends Model
         else return false;
     }
 
+    public function setStartDateAttribute($startDate) {
+        $this->attributes['start_date'] = Carbon::parse($startDate)->toDateTimeString();
+        return $this->attributes['start_date'];
+    }
+
+    public function setEndDateAttribute($endDate) {
+        $this->attributes['end_date'] = Carbon::parse($endDate)->toDateTimeString();
+        return $this->attributes['end_date'];
+    }
+
     public static function rules()
     {
         return [
@@ -38,8 +49,8 @@ class Internship extends Model
             'company_name' => 'required',
             'location' => 'required',
             'description' => 'required',
-            'start_date' => 'required|dateformat:Y-m',
-            'end_date' => 'required|dateformat:Y-m',
+            'start_date' => 'required|date|dateformat:Y-m',
+            'end_date' => 'required|date|dateformat:Y-m',
         ];
     }
 

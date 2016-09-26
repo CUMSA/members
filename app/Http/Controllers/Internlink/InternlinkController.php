@@ -109,7 +109,7 @@ class InternlinkController extends Controller
     {
         $form = $this->form(InternshipForm::class);
         $form->validate(Internship::rules(), [
-            'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM',
         ]);
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
