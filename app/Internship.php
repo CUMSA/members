@@ -11,6 +11,16 @@ class Internship extends Model
         return $this->belongsTo('App\Link');
     }
 
+    public function hasKeyword($keyword)
+    {
+        if(stripos(implode("", $this->toArray()), $keyword))
+        {
+            return true;
+        }
+
+        else return false;
+    }
+
     public static function relatedFields()
     {
         return [
