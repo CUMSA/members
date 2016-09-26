@@ -22,16 +22,6 @@ class Internship extends Model
         return $this->belongsTo('App\Link');
     }
 
-    public function hasKeyword($keyword)
-    {
-        if(stripos(implode("", $this->toArray()), $keyword) !== false)
-        {
-            return true;
-        }
-
-        else return false;
-    }
-
     public function setStartDateAttribute($startDate) {
         $this->attributes['start_date'] = Carbon::parse($startDate)->toDateTimeString();
         return $this->attributes['start_date'];

@@ -9,8 +9,8 @@
 
                 <div class="panel-body">
                     <ul>
-                        <li><a href={!! route('member.profile') !!}>Edit profile</a></li>
-                        <li>View event registrations</li>
+                        <li><a href={{ route('member.profile') }}>Edit profile</a></li>
+                        <li><a href={{ route('internlink.profile') }}>Edit InternLink profile</a></li>
                     </ul>
                 </div>
             </div>

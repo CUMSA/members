@@ -14,6 +14,7 @@ use App\Forms\InternlinkSearchForm;
 use App\Forms\InternshipForm;
 use JsValidator;
 use Auth;
+use DB;
 
 class InternlinkController extends Controller
 {
@@ -29,8 +30,9 @@ class InternlinkController extends Controller
         $internship_count = Internship::all()->count();
 
         return view('internlink.index', compact('form'))->with([
-            'validator' => JsValidator::make($this->rules())
-        ])->with('internship_count', $internship_count);
+            'validator' => JsValidator::make($this->rules()),
+            'internship_count' => $internship_count,
+        ]);
     }
 
     public function search(Request $request)
@@ -42,26 +44,19 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $internships = collect();
         $conditions = $request['filter_by'];
-        foreach ($conditions as $condition)
-        {
-            $internships = $internships->merge(Internship::where('related_field', $condition)->get());
-        }
+        $keyword = $request['keyword'];
+        $regex = '%' . $keyword . '%';
 
-        if($request['keyword'] !== ''){
-            $internships = $internships->filter(function($internship) use ($request) {
-                if($internship->hasKeyword($request['keyword']))
-                {
-                    return $internship;
-                }
-            });
-        }
+        $internships = Internship::whereIn('related_field', $conditions);
 
-        if($internships->count() == 0)
-        {
-            return view('internlink.empty');
-        }
+        $internships = $internships->when($keyword !== '', function($query) use ($regex) {
+            return $query
+                ->where('role_name', 'like', $regex)
+                ->orWhere('company_name', 'like', $regex)
+                ->orWhere('description', 'like', $regex)
+                ->orWhere('location', 'like', $regex);
+        })->get();
 
         return view('internlink.results')->with('internships', $internships);
     }
@@ -131,17 +126,17 @@ class InternlinkController extends Controller
 
         $member_details = ['name' => $member->full_name];
 
-        if($link->show_uk_phone == 1){
-            $member_details = array_merge($member_details, ['mobile_uk' => $member->mobile_uk]);
+        if($link->show_uk_phone){
+            $member_details['mobile_uk'] = $member->mobile_uk;
         }
-        if($link->show_home_phone == 1){
-            $member_details = array_merge($member_details, ['mobile_home' => $member->mobile_home]);
+        if($link->show_home_phone){
+            $member_details['mobile_home'] = $member->mobile_home;
         }
         if($link->show_hermes_email){
-            $member_details = array_merge($member_details, ['email_hermes' => $member->email_hermes]);
+            $member_details['email_hermes'] = $member->email_hermes;
         }
         if($link->show_other_email){
-            $member_details = array_merge($member_details, ['email_other' => $member->email_other]);
+            $member_details['email_other'] = $member->email_other;
         }
 
         return view('internlink.internship')

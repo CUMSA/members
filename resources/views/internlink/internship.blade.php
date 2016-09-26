@@ -6,48 +6,48 @@
     <table id="profile">
         <tr>
             <td id="col1">Name</td>
-            <td id="col2">{!! $member_details['name'] !!}</td>
+            <td id="col2">{{ $member_details['name'] }}</td>
         </tr>
         @if(isset($member_details['mobile_uk']))
             <tr>
                 <td id="col1">UK Mobile</td>
-                <td id="col2">{!! $member_details['mobile_uk'] !!}</td>
+                <td id="col2">{{ $member_details['mobile_uk'] }}</td>
             </tr>
         @endif
 
         @if(isset($member_details['mobile_home']))
             <tr>
-                <td id="col1">UK Mobile</td>
-                <td id="col2">{!! $member_details['mobile_home'] !!}</td>
+                <td id="col1">Home Phone</td>
+                <td id="col2">{{ $member_details['mobile_home'] }}</td>
             </tr>
         @endif
 
         @if(isset($member_details['email_hermes']))
             <tr>
-                <td id="col1">UK Mobile</td>
-                <td id="col2">{!! $member_details['email_hermes'] !!}</td>
+                <td id="col1">Hermes Email</td>
+                <td id="col2">{{ $member_details['email_hermes'] }}</td>
             </tr>
         @endif
 
         @if(isset($member_details['email_other']))
             <tr>
-                <td id="col1">UK Mobile</td>
-                <td id="col2">{!! $member_details['email_other'] !!}</td>
+                <td id="col1">Other Email</td>
+                <td id="col2">{{ $member_details['email_other'] }}</td>
             </tr>
         @endif
 
         <tr>
             <td id="col1">Role</td>
-            <td id="col2">{!! $internship->role_name !!}</td>
+            <td id="col2">{{ $internship->role_name }}</td>
         </tr>
 
         <tr>
             <td id="col1">Company</td>
-            <td id="col2">{!! $internship->company_name !!}</td>
+            <td id="col2">{{ $internship->company_name }}</td>
         </tr>
         <tr>
             <td id="col1">Location</td>
-            <td id="col2">{!! $internship->location !!}</td>
+            <td id="col2">{{ $internship->location }}</td>
         </tr>
         <tr>
             <td id="col1">Start Date</td>
@@ -59,7 +59,7 @@
         </tr>
         <tr>
             <td id="col1">Description</td>
-            <td id="col2">{!! $internship->description !!}</td>
+            <td id="col2">{{ $internship->description }}</td>
         </tr>
     </table>
 

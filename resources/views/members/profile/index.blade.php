@@ -13,14 +13,14 @@
     @if(Session::has('alert-success'))
         <div class="alert alert-success">
             <a class="close" data-dismiss="alert">×</a>
-            {!! Session::get('alert-success') !!}
+            {{ Session::get('alert-success') }}
         </div>
     @endif
     
     @if(Session::has('alert-warning'))
         <div class="alert alert-danger">
             <a class="close" data-dismiss="alert">×</a>
-            {!! Session::get('alert-warning') !!}
+            {{ Session::get('alert-warning') }}
         </div>
     @endif
 

@@ -11,15 +11,17 @@
             <th>Company Name</th>
             <th>Location</th>
         </tr>
-        @foreach($internships as $internship)
-                <tr class="clickable-row" data-href="{!! route('internlink.internship', $internship->id) !!}">
-                    <td>{!! $internship->link->member->full_name !!}</td>
-                    <td>{!! $internship->role_name !!}</td>
-                    <td>{!! $internship->company_name !!}</td>
-                    <td>{!! $internship->location !!}</td>
-                </tr>
+        @forelse($internships as $internship)
+            <tr class="clickable-row" data-href="{{ route('internlink.internship', $internship->id) }}">
+                <td>{{ $internship->link->member->full_name }}</td>
+                <td>{{ $internship->role_name }}</td>
+                <td>{{ $internship->company_name }}</td>
+                <td>{{ $internship->location }}</td>
+            </tr>
             </a>
-        @endforeach
+        @empty
+            <td>No users to show</td>
+        @endforelse
     </table>
     <style>
         #results {
