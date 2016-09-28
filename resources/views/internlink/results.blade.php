@@ -18,9 +18,8 @@
                 <td>{{ $internship->company_name }}</td>
                 <td>{{ $internship->location }}</td>
             </tr>
-            </a>
         @empty
-            <td>No users to show</td>
+            <tr><td colspan="4" id="empty">No users to show</td></tr>
         @endforelse
     </table>
     <style>
@@ -41,6 +40,10 @@
         th {
             background-color: #94b8b8;
             color: white;
+        }
+        #empty {
+            text-align: center;
+            font-size: 150%;
         }
     </style>
 

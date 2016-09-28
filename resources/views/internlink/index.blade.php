@@ -9,6 +9,7 @@
     <h4>There are currently {{ $internship_count }} entries in the database</h4>
     <h4><a href="{{ route('internlink.all') }}">View all entries</a></h4>
     {!! form($form) !!}
-    <h4><a href="{{ route('internlink.signup') }}">Signup For Internlink</a></h4>
-
+    @if(!$link_exists)
+        <h3>Alternatively, you can <a href="{{ route('internlink.signup') }}">signup</a> for Internlink</h3>
+    @endif
 @endsection

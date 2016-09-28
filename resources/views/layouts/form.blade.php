@@ -45,7 +45,7 @@
         }
     </style>
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-    {{ $validator }}
+    {!! $validator !!}
 @endsection
 
 @section('panel-body')

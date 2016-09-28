@@ -22,6 +22,11 @@ class InternlinkController extends Controller
 
     public function show()
     {
+        $link_exists = false;
+        if(Auth::user()->member->link !== null){
+            $link_exists = true;
+        }
+
         $form = $this->form(InternlinkSearchForm::class,[
             'method' => 'POST',
             'url' => route('internlink.search'),
@@ -32,6 +37,7 @@ class InternlinkController extends Controller
         return view('internlink.index', compact('form'))->with([
             'validator' => JsValidator::make($this->rules()),
             'internship_count' => $internship_count,
+            'link_exists' => $link_exists,
         ]);
     }
 
@@ -148,7 +154,6 @@ class InternlinkController extends Controller
     {
         $internships = Internship::all();
         return view('internlink.results')->with('internships', $internships);
-
     }
 
     public function rules()
