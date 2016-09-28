@@ -8,6 +8,10 @@
             <td id="col1">Name</td>
             <td id="col2">{{ $member_details['name'] }}</td>
         </tr>
+        <tr>
+            <td id="col1">About me</td>
+            <td id="col2">{{ $about_me }}</td>
+        </tr>
         @if(isset($member_details['mobile_uk']))
             <tr>
                 <td id="col1">UK Mobile</td>
@@ -40,7 +44,6 @@
             <td id="col1">Role</td>
             <td id="col2">{{ $internship->role_name }}</td>
         </tr>
-
         <tr>
             <td id="col1">Company</td>
             <td id="col2">{{ $internship->company_name }}</td>
@@ -55,11 +58,15 @@
         </tr>
         <tr>
             <td id="col1">End Date</td>
-            <td id="col2">{{ date('F Y', strtotime($internship->start_date)) }}</td>
+            <td id="col2">{{ date('F Y', strtotime($internship->end_date)) }}</td>
         </tr>
         <tr>
             <td id="col1">Description</td>
             <td id="col2">{{ $internship->description }}</td>
+        </tr>
+        <tr>
+            <td id="col1">Comments on application</td>
+            <td id="col2">{{ $internship->comments_application }}</td>
         </tr>
     </table>
 

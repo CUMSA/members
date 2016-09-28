@@ -19,6 +19,7 @@ class CreateInternshipsTable extends Migration
             $table->string('related_field');
             $table->string('company_name');
             $table->text('description');
+            $table->text('comments_application');
             $table->string('location');
             $table->date('start_date');
             $table->date('end_date');

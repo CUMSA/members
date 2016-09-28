@@ -15,6 +15,7 @@ class CreateLinksTable extends Migration
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('member_id')->unsigned();
+            $table->text('describe_self');
             $table->boolean('show_uk_phone');
             $table->boolean('show_home_phone');
             $table->boolean('show_hermes_email');

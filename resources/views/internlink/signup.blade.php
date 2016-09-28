@@ -16,5 +16,12 @@
             {{ Session::get('alert-success') }}
         </div>
     @endif
+
+    @if(Session::has('signup'))
+        <div class="alert alert-warning">
+            <a class="close" data-dismiss="alert">×</a>
+            {{ Session::get('signup') }}
+        </div>
+    @endif
     {!! form($form) !!}
 @endsection

@@ -12,6 +12,7 @@ class Link extends Model
         'show_home_phone',
         'show_hermes_email',
         'show_other_email',
+        'describe_self'
     ];
 
     public function internship()

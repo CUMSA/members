@@ -69,7 +69,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('internlink/signup/addinternship', ['as' => 'internlink.signup.internship', 'uses' => 'Internlink\InternlinkController@addInternship']);
         Route::post('internlink/signup/addinternship', ['as' => 'internlink.signup.internship.save', 'uses' => 'Internlink\InternlinkController@saveInternship']);
 
-        Route::get('internlink/myprofile', ['as' => 'internlink.profile', 'uses' => 'Internlink\InternlinkController@editProfile']);
+        Route::get('internlink/myprofile/{option}', ['as' => 'internlink.profile', 'uses' => 'Internlink\InternlinkController@viewProfile']);
+        Route::post('internlink/myprofile/{option}', ['as' => 'internlink.profile.update', 'uses' => 'Internlink\InternlinkController@saveProfile']);
 
         Route::get('internlink/profiles/{id}', ['as' => 'internlink.internship', 'uses' => 'Internlink\InternlinkController@viewInternship']);
 

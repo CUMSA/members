@@ -12,6 +12,7 @@ class Internship extends Model
         'related_field',
         'company_name',
         'description',
+        'comments_application',
         'location',
         'start_date',
         'end_date',
@@ -39,8 +40,8 @@ class Internship extends Model
             'company_name' => 'required',
             'location' => 'required',
             'description' => 'required',
-            'start_date' => 'required|date|dateformat:Y-m',
-            'end_date' => 'required|date|dateformat:Y-m',
+            'start_date' => 'required|date|dateformat:Y-m-d',
+            'end_date' => 'required|date|dateformat:Y-m-d',
         ];
     }
 
