@@ -38,6 +38,7 @@ class Internship extends Model
         return [
             'role_name' => 'required',
             'company_name' => 'required',
+            'related_field' => 'required',
             'location' => 'required',
             'description' => 'required',
             'start_date' => 'required|date|dateformat:Y-m-d',
