@@ -22,10 +22,10 @@ class InternlinkSignupForm extends Form
             ->add('contact_options', 'choice', [
                 'label' => 'Show my:',
                 'choices' => [
-                    'show_mobile_uk' => 'UK Phone',
-                    'show_mobile_home' => 'Home Phone',
-                    'show_hermes' => 'Hermes Email',
-                    'show_email_other' => 'Other Email',
+                    'show_uk_phone' => 'UK Phone',
+                    'show_home_phone' => 'Home Phone',
+                    'show_hermes_email' => 'Hermes Email',
+                    'show_other_email' => 'Other Email',
                 ],
                 'multiple' => true,
                 'expanded' => true,

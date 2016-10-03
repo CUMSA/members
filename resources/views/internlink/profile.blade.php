@@ -16,7 +16,6 @@
             {{ Session::get('alert-warning') }}
         </div>
     @endif
-
     <h4>Update profile for:</h4>
     <div id="buttons">
         <a href="{{ route('internlink.profile', 'contact') }}" class="btn btn-success" id="contact">Contact Information</a>

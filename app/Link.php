@@ -12,8 +12,16 @@ class Link extends Model
         'show_home_phone',
         'show_hermes_email',
         'show_other_email',
-        'describe_self'
+        'describe_self',
     ];
+
+    public function resetContact()
+    {
+        $this->show_uk_phone = false;
+        $this->show_home_phone = false;
+        $this->show_hermes_email = false;
+        $this->show_other_email = false;
+    }
 
     public function internship()
     {

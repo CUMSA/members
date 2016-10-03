@@ -89,6 +89,9 @@ class InternlinkController extends Controller
 
         $link = new Link($request->all());
         $link->member_id = Auth::user()->member->id;
+        foreach($request['contact_options'] as $option){
+            $link->$option = true;
+        }
         $link->save();
 
         return redirect()->route('internlink.signup.internship');
@@ -210,6 +213,11 @@ class InternlinkController extends Controller
             }
 
             $link = Link::where('member_id', $member->id)->get()->first();
+
+            $link->resetContact();
+            foreach($request['contact_options'] as $option){
+                $link->$option = true;
+            }
             $link->update($request->all());
         }
         else
