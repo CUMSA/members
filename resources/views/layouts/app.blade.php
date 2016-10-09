@@ -75,6 +75,8 @@
                     @endif
 
                     <li><a href="{{ route('member.directory') }}">Members Directory</a></li>
+
+                    <li><a href="{{ route('internlink') }}">InternLink</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

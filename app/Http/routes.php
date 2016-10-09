@@ -54,10 +54,28 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('signup/fresher', ['as' => 'member.signup.fresher', 'uses' => 'SignupController@showFresher']);
     Route::post('signup/fresher', ['as' => 'member.signup.fresher.save', 'uses' => 'SignupController@saveFresher']);
 
-    Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show'])->middleware('auth');
-    Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
+    Route::group(['middleware' => ['auth']], function() {
+        Route::get('/profile', ['as' => 'member.profile', 'uses' => 'Profile\ProfileController@show']);
+        Route::post('/profile', ['as' => 'member.profile.update', 'uses' => 'Profile\ProfileController@save']);
 
-    Route::get('directory', ['as' => 'member.directory', 'uses' => 'Directory\DirectoryController@show'])->middleware('auth');
+        Route::get('directory', ['as' => 'member.directory', 'uses' => 'Directory\DirectoryController@show']);
+
+        Route::get('internlink', ['as' => 'internlink', 'uses' => 'Internlink\InternlinkController@show']);
+        Route::post('internlink', ['as' => 'internlink.search', 'uses' => 'Internlink\InternlinkController@search']);
+
+        Route::get('internlink/signup', ['as' => 'internlink.signup', 'uses' => 'Internlink\InternlinkController@signup']);
+        Route::post('internlink/signup', ['as' => 'internlink.signup.save', 'uses' => 'Internlink\InternlinkController@save']);
+
+        Route::get('internlink/signup/addinternship', ['as' => 'internlink.signup.internship', 'uses' => 'Internlink\InternlinkController@addInternship']);
+        Route::post('internlink/signup/addinternship', ['as' => 'internlink.signup.internship.save', 'uses' => 'Internlink\InternlinkController@saveInternship']);
+
+        Route::get('internlink/myprofile/{option}', ['as' => 'internlink.profile', 'uses' => 'Internlink\InternlinkController@viewProfile']);
+        Route::post('internlink/myprofile/{option}', ['as' => 'internlink.profile.update', 'uses' => 'Internlink\InternlinkController@saveProfile']);
+
+        Route::get('internlink/profiles/{id}', ['as' => 'internlink.internship', 'uses' => 'Internlink\InternlinkController@viewInternship']);
+
+        Route::get('internlink/all' ,['as' => 'internlink.all', 'uses' => 'Internlink\InternlinkController@viewAll']);
+    });
 });
 
 // Committee routes.

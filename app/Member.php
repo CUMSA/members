@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Member extends Model
 {
@@ -136,6 +137,11 @@ class Member extends Model
         return $rules;
     }
 
+    public function link()
+    {
+        return $this->hasOne('App\Link');
+    }
+
     public function college()
     {
         return $this->belongsTo('App\College');
@@ -155,7 +161,7 @@ class Member extends Model
         if (isset($this->college)) {
             return $this->college->name;
         } else {
-            return null;
+            return $this->college;
         }
     }
 
