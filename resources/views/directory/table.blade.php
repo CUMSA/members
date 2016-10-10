@@ -46,6 +46,8 @@
                 dropdownMenu: ['filter_by_value', 'filter_by_condition', 'filter_action_bar'],
                 filters: true,
                 preventOverflow: "horizontal",
+                width: 1140,
+                height: 500,
             });
 
             var inst = $('#hot').handsontable('getInstance');
