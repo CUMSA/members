@@ -51,6 +51,7 @@ class SignupController extends Controller
 
         $member = Member::create($request->all());
         $member->membership_type = $request->membership_type;
+        $member->crsid = explode('@', $request->email_hermes, 2)[0];
         $member->registration_time = null;
         $member->save();
 
