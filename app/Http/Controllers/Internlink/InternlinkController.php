@@ -23,7 +23,7 @@ class InternlinkController extends Controller
     public function show()
     {
         $link_exists = false;
-        if(Auth::user()->member->link !== null){
+        if(Auth::user()->member->internlink !== null){
             $link_exists = true;
         }
 
@@ -113,14 +113,14 @@ class InternlinkController extends Controller
     {
         $form = $this->form(InternshipForm::class);
         $form->validate(Internship::rules(), [
-            'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM',
         ]);
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
         $internship = new Internship($request->all());
-        $internship->link_id = Auth::user()->member->link->id;
+        $internship->link_id = Auth::user()->member->internlink->id;
         $internship->save();
 
         $success_msg = 'Your internship details have been saved! You may submit another internship if you wish.';
@@ -160,80 +160,83 @@ class InternlinkController extends Controller
         return view('internlink.results')->with('internships', $internships);
     }
 
-    // $option can be number or 'contact'
-    public function viewProfile($option)
+    public function myContact()
     {
-        $member_id = Auth::user()->member->id;
-        $link = Link::where('member_id', $member_id)->get()->first();
-        if($link === null)
-        {
+        $form = $this->form(InternlinkSignupForm::class, [
+            'method' => 'POST',
+            'url' => route('internlink.profile.contact.update'),
+            'model' => Auth::user()->member->internlink,
+        ]);
+
+        return $this->profile(Link::rules(), $form);
+    }
+
+    public function myInternship($id)
+    {
+        if (Auth::user()->member->internlink === null) {
             return redirect()->route('internlink.signup')->with('signup', 'You have not signed up for InternLink yet!');
         }
 
-        $internships = Internship::where('link_id', $link->id)->get();
+        $form = $this->form(InternshipForm::class, [
+            'method' => 'POST',
+            'url' => route('internlink.profile.internship.update', $id),
+            'model' => Internship::where('id', $id)->get()->first(),
+        ]);
 
-        if($option === 'contact')
-        {
-            $form = $this->form(InternlinkSignupForm::class,[
-                'method' => 'POST',
-                'url' => route('internlink.profile.update', $option),
-                'model' => $link,
-            ]);
-            $rules = Link::rules();
-        }
-        else
-        {
-            $internship = Internship::where('id', $option)->get()->first();
-            $form = $this->form(InternshipForm::class, [
-                'method' => 'POST',
-                'url' => route('internlink.profile.update', $option),
-                'model' => $internship,
-            ]);
-            $rules = Internship::rules();
+        return $this->profile(Internship::rules(), $form);
+    }
+
+    public function profile($rules, $form)
+    {
+        if (Auth::user()->member->internlink === null) {
+            return redirect()->route('internlink.signup')->with('signup', 'You have not signed up for InternLink yet!');
         }
 
+        $internships = Auth::user()->member->internlink->internship;
         return view('internlink.profile', compact('form'))->with([
             'validator' => JsValidator::make($rules),
             'internships' => $internships,
-        ]);
+            ]);
     }
 
-    public function saveProfile($option, Request $request)
+    public function updateContact(Request $request)
     {
         $member = Auth::user()->member;
-        if($option === 'contact')
-        {
-            $form = $this->form(InternlinkSignupForm::class);
-            $form->validate(Link::rules(), [
-                'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
-            ]);
+        $form = $this->form(InternlinkSignupForm::class);
 
-            if (!$form->isValid()) {
-                return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
-            }
+        $form->validate(Link::rules(), [
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM',
+        ]);
 
-            $link = Link::where('member_id', $member->id)->get()->first();
-
-            $link->resetContact();
-            foreach($request['contact_options'] as $option){
-                $link->$option = true;
-            }
-            $link->update($request->all());
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
-        else
-        {
-            $form = $this->form(InternshipForm::class);
-            $form->validate(Internship::rules(), [
-                'dateformat' => 'Date should be a valid date of the format YYYY-MM-DD',
-            ]);
-            if (!$form->isValid()) {
-                return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
-            }
 
-            $internship = Internship::where('id', $option)->get()->first();
-            $internship->update($request->all());
+        $link = Link::where('member_id', $member->id)->get()->first();
+
+        $link->resetContact();
+        foreach($request['contact_options'] as $option){
+            $link->$option = true;
         }
-        return redirect()->route('internlink.profile', $option)->with('alert-success', 'Profile updated.');
+        $link->update($request->all());
+
+        return redirect()->route('internlink.profile.contact.update')->with('alert-success', 'Profile updated.');
+    }
+
+    public function updateInternship(Request $request, $id)
+    {
+        $form = $this->form(InternshipForm::class);
+        $form->validate(Internship::rules(), [
+            'dateformat' => 'Date should be a valid date of the format YYYY-MM',
+        ]);
+        if (!$form->isValid()) {
+            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
+        }
+
+        $internship = Internship::where('id', $id)->get()->first();
+        $internship->update($request->all());
+
+        return redirect()->route('internlink.profile.internship.update', $id)->with('alert-success', 'Profile updated.');
     }
 
     public function rules()

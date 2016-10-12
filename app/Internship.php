@@ -41,8 +41,8 @@ class Internship extends Model
             'related_field' => 'required',
             'location' => 'required',
             'description' => 'required',
-            'start_date' => 'required|date|dateformat:Y-m-d',
-            'end_date' => 'required|date|dateformat:Y-m-d',
+            'start_date' => 'required|date|dateformat:Y-m',
+            'end_date' => 'required|date|dateformat:Y-m',
         ];
     }
 

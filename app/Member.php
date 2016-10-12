@@ -137,7 +137,7 @@ class Member extends Model
         return $rules;
     }
 
-    public function link()
+    public function internlink()
     {
         return $this->hasOne('App\Link');
     }

@@ -29,7 +29,7 @@ $factory->define(App\Member::class, function (Faker\Generator $faker) {
         'nationality' => 'Guatemalan',
         'is_singapore_pr' => '1',
         'nric' => 'S9411885I',
-        'crsid' => 'hlt38',
+        'crsid' => $faker->unique()->text(10),
         'email_hermes' => 'hlt38@cam.ac.uk',
         'email_other' => $faker->email(),
         'mobile_uk' => $faker->phoneNumber,

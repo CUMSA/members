@@ -18,9 +18,9 @@
     @endif
     <h4>Update profile for:</h4>
     <div id="buttons">
-        <a href="{{ route('internlink.profile', 'contact') }}" class="btn btn-success" id="contact">Contact Information</a>
+        <a href="{{ route('internlink.profile.contact') }}" class="btn btn-success" id="contact">Contact Information</a>
         @foreach($internships as $internship)
-            <a href="{{ route('internlink.profile', $internship->id) }}" class="btn btn-success" id="{{ $internship->id }}">{{ $internship->company_name }}</a>
+            <a href="{{ route('internlink.profile.internship', $internship->id) }}" class="btn btn-success" id="{{ $internship->id }}">{{ $internship->company_name }}</a>
         @endforeach
     </div>
     <h4>

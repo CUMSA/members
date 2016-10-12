@@ -46,16 +46,13 @@
                 dropdownMenu: ['filter_by_value', 'filter_by_condition', 'filter_action_bar'],
                 filters: true,
                 preventOverflow: "horizontal",
+                width: 1140,
+                height: 500,
             });
 
             var inst = $('#hot').handsontable('getInstance');
             setTimeout(function() {
                 inst.getPlugin('collapsibleColumns').collapseAll();
-                $('#export').click(function() {
-                    inst.getPlugin('exportFile').downloadFile('csv', {
-                        filename: 'members-filtered'
-                    });
-                });
             }, 500);
 
             var colIndexes = {
