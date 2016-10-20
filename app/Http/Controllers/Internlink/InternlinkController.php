@@ -22,10 +22,7 @@ class InternlinkController extends Controller
 
     public function show()
     {
-        $link_exists = false;
-        if(Auth::user()->member->internlink !== null){
-            $link_exists = true;
-        }
+        $link_exists = Auth::user()->member->internlink !== null;
 
         $form = $this->form(InternlinkSearchForm::class,[
             'method' => 'POST',
@@ -69,6 +66,9 @@ class InternlinkController extends Controller
 
     public function signup()
     {
+        if(Auth::user()->member->internlink !== null){
+            return redirect()->route('internlink.profile.contact')->with('alert-warning', 'You have already signed up for InternLink!');
+        }
         $form = $this->form(InternlinkSignupForm::class,[
             'method' => 'POST',
             'url' => route('internlink.signup.save'),
@@ -89,9 +89,6 @@ class InternlinkController extends Controller
 
         $link = new Link($request->all());
         $link->member_id = Auth::user()->member->id;
-        foreach($request['contact_options'] as $option){
-            $link->$option = true;
-        }
         $link->save();
 
         return redirect()->route('internlink.signup.internship');
@@ -119,9 +116,10 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
-        $internship = new Internship($request->all());
-        $internship->link_id = Auth::user()->member->internlink->id;
-        $internship->save();
+        Auth::user()->member->internlink->internships()->save(new Internship(array_merge(
+            $request->all(),
+            ['link_id' => Auth::user()->member->internlink->id]
+        )));
 
         $success_msg = 'Your internship details have been saved! You may submit another internship if you wish.';
         return redirect()->route('internlink.signup.internship')->with('alert-success', $success_msg);
@@ -173,10 +171,9 @@ class InternlinkController extends Controller
 
     public function myInternship($id)
     {
-        if (Auth::user()->member->internlink === null) {
-            return redirect()->route('internlink.signup')->with('signup', 'You have not signed up for InternLink yet!');
+        if(Auth::user()->member->internlink->internships()->find($id) === null){
+            return redirect()->route('internlink')->with('alert-warning', 'Permission denied.');
         }
-
         $form = $this->form(InternshipForm::class, [
             'method' => 'POST',
             'url' => route('internlink.profile.internship.update', $id),
@@ -192,11 +189,11 @@ class InternlinkController extends Controller
             return redirect()->route('internlink.signup')->with('signup', 'You have not signed up for InternLink yet!');
         }
 
-        $internships = Auth::user()->member->internlink->internship;
+        $internships = Auth::user()->member->internlink->internships;
         return view('internlink.profile', compact('form'))->with([
             'validator' => JsValidator::make($rules),
             'internships' => $internships,
-            ]);
+        ]);
     }
 
     public function updateContact(Request $request)
@@ -212,12 +209,8 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
-        $link = Link::where('member_id', $member->id)->get()->first();
-
+        $link = $member->internlink;
         $link->resetContact();
-        foreach($request['contact_options'] as $option){
-            $link->$option = true;
-        }
         $link->update($request->all());
 
         return redirect()->route('internlink.profile.contact.update')->with('alert-success', 'Profile updated.');

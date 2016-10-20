@@ -7,6 +7,8 @@ use Carbon\Carbon;
 
 class Internship extends Model
 {
+    protected $dateFormat = 'Y-m';
+
     protected $fillable = [
         'role_name',
         'related_field',

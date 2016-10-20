@@ -26,8 +26,8 @@ class InternshipForm extends Form
                 'label' => 'Comments on application',
                 'attr' => ['rows' => 5],
             ])
-            ->add('start_date', 'date', ['label' => 'Start Date', 'default_value' => 'YYYY-MM'])
-            ->add('end_date', 'date', ['label' => 'End Date', 'default_value' => 'YYYY-MM'])
+            ->add('start_date', 'month', ['label' => 'Start Date', 'default_value' => 'YYYY-MM'])
+            ->add('end_date', 'month', ['label' => 'End Date', 'default_value' => 'YYYY-MM'])
             ->add('submit', 'submit');
     }
 }

@@ -19,17 +19,10 @@ class InternlinkSignupForm extends Form
         $profile_route = route('member.profile');
         $reminder_msg = "Please ensure that you have <a href=$profile_route>updated</a> your contact details accordingly.";
         $this
-            ->add('contact_options', 'choice', [
-                'label' => 'Show my:',
-                'choices' => [
-                    'show_uk_phone' => 'UK Phone',
-                    'show_home_phone' => 'Home Phone',
-                    'show_hermes_email' => 'Hermes Email',
-                    'show_other_email' => 'Other Email',
-                ],
-                'multiple' => true,
-                'expanded' => true,
-            ])
+            ->add('show_home_phone', 'checkbox')
+            ->add('show_uk_phone', 'checkbox')
+            ->add('show_hermes_email', 'checkbox')
+            ->add('show_other_email', 'checkbox')
             ->add('reminder_msg', 'static', [
                 'label' => $reminder_msg,
             ])
