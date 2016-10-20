@@ -15,15 +15,7 @@ class Link extends Model
         'describe_self',
     ];
 
-    public function resetContact()
-    {
-        $this->show_uk_phone = false;
-        $this->show_home_phone = false;
-        $this->show_hermes_email = false;
-        $this->show_other_email = false;
-    }
-
-    public function internship()
+    public function internships()
     {
         return $this->hasMany('App\Internship');
     }
@@ -36,8 +28,12 @@ class Link extends Model
 
     public static function rules()
     {
+        // Spaces in front of commas removed because they cause validation to become wonky
         return [
-            'contact_options' => 'required',
+            'show_home_phone' => 'required_without_all:show_uk_phone,show_other_email,show_hermes_email',
+            'show_uk_phone' => 'required_without_all:show_home_phone,show_hermes_email,show_other_email',
+            'show_hermes_email' => 'required_without_all:show_home_phone,show_other_email,show_uk_phone',
+            'show_other_email' => 'required_without_all:show_uk_phone,show_hermes_email,show_home_phone',
         ];
     }
 }

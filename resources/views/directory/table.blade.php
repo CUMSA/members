@@ -53,11 +53,6 @@
             var inst = $('#hot').handsontable('getInstance');
             setTimeout(function() {
                 inst.getPlugin('collapsibleColumns').collapseAll();
-                $('#export').click(function() {
-                    inst.getPlugin('exportFile').downloadFile('csv', {
-                        filename: 'members-filtered'
-                    });
-                });
             }, 500);
 
             var colIndexes = {
