@@ -15,14 +15,6 @@ class Link extends Model
         'describe_self',
     ];
 
-    public function resetContact()
-    {
-        $this->show_uk_phone = false;
-        $this->show_home_phone = false;
-        $this->show_hermes_email = false;
-        $this->show_other_email = false;
-    }
-
     public function internships()
     {
         return $this->hasMany('App\Internship');

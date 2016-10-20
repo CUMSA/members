@@ -28,7 +28,7 @@ $factory->define(App\Member::class, function (Faker\Generator $faker) {
         'date_of_birth' => '2000-12-12',
         'nationality' => 'Guatemalan',
         'is_singapore_pr' => '1',
-        'nric' => 'S9411885I',
+        'nric' => 'S8600876I',
         'crsid' => $faker->unique()->text(10),
         'email_hermes' => 'hlt38@cam.ac.uk',
         'email_other' => $faker->email(),

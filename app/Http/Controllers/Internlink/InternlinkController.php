@@ -116,10 +116,7 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
-        Auth::user()->member->internlink->internships()->save(new Internship(array_merge(
-            $request->all(),
-            ['link_id' => Auth::user()->member->internlink->id]
-        )));
+        Auth::user()->member->internlink->internships()->save(new Internship($request->all()));
 
         $success_msg = 'Your internship details have been saved! You may submit another internship if you wish.';
         return redirect()->route('internlink.signup.internship')->with('alert-success', $success_msg);
@@ -209,9 +206,7 @@ class InternlinkController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('alert-warning', 'Error in form input!');
         }
 
-        $link = $member->internlink;
-        $link->resetContact();
-        $link->update($request->all());
+        $member->internlink->update($request->all());
 
         return redirect()->route('internlink.profile.contact.update')->with('alert-success', 'Profile updated.');
     }
