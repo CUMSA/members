@@ -18,5 +18,6 @@
         <h3>Alternatively, you can <a href="{{ route('internlink.signup') }}">signup</a> for Internlink</h3>
     @else
         <h3>Update my <a href="{{ route('internlink.profile.contact') }}">profile</a></h3>
+        <h5><a href="{{ route('internlink.policy') }}">Usage Policy</a></h5>
     @endif
 @endsection
