@@ -78,6 +78,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('internlink/profiles/{id}', ['as' => 'internlink.internship', 'uses' => 'Internlink\InternlinkController@viewInternship']);
 
         Route::get('internlink/all' ,['as' => 'internlink.all', 'uses' => 'Internlink\InternlinkController@viewAll']);
+
+        Route::get('internlink/policy', ['as' => 'internlink.policy', function () {
+            return view('internlink.policy');
+        }]);
     });
 });
 
