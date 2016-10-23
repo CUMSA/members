@@ -4,11 +4,11 @@
 @section('panel-heading', 'InternLink')
 @section('panel-body')
     <h2>Usage Policy</h2>
-    <h4>InternLink is meant to be a tool for current CUMSA members (Users) to seek the advice of past/current members (Contributors)
-        with regards to internship and job applications. Below are the privacy policy for the platform.</h4>
+    <h4>InternLink is a tool for current CUMSA members (Users) to seek the advice of past/current members (Contributors)
+        with regards to internship and job applications.</h4>
     <h3><u>For contributors</u></h3>
-    <h4>CUMSA will store the information you have provided on a server and make it available only to members of CUMSA (by authentication via RAVEN).
-        By providing us with these information, you assent to being contacted by current and recently graduated CUMSA members for the provision of general and specific advice about your current job and any past jobs/internships you may have performed.
+    <h4>CUMSA will store the information you have provided on a server and make it available only to members of CUMSA.
+        By providing us with this information, you agree to being contacted by current and recently graduated CUMSA members for the provision of general and specific advice about your current job and any past jobs/internships you may have performed.
         If you wish to have your details removed from the database for whatever reason, please submit a written request to database@cumsa.org asking for the removal.</h4>
     <h3><u>For users</u></h3>
     <h4>The data provided on the InternLink platform is strictly for your own usage and should not be shared with friends, family or other associates without the consent of the person whom the data pertains to.
